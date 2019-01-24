@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.wb.internal.core.model.property.order.ReorderDialog">
+		<item value="619" key="x"/>
+		<item value="682" key="width"/>
+		<item value="303" key="y"/>
+		<item value="473" key="height"/>
+	</section>
+	<section name="org.eclipse.wb.internal.swing.model.property.editor.models.table.TableModelDialog">
+		<item value="434" key="x"/>
+		<item value="958" key="width"/>
+		<item value="386" key="y"/>
+		<item value="670" key="height"/>
+	</section>
+	<section name="org.eclipse.wb.internal.core.model.property.editor.string.StringPropertyDialog">
+		<item value="610" key="x"/>
+		<item value="700" key="width"/>
+		<item value="320" key="y"/>
+		<item value="440" key="height"/>
+	</section>
+</section>
