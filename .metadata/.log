@@ -1188,3 +1188,269 @@ Caused by: org.eclipse.core.runtime.AssertionFailedException: null argument:
 	at org.eclipse.wb.internal.gef.core.EditDomain.mouseUp(EditDomain.java:255)
 	at org.eclipse.wb.internal.gef.graphical.EditEventManager.mouseUp(EditEventManager.java:149)
 	... 32 more
+
+!ENTRY org.eclipse.wb.core 4 4 2019-01-24 14:36:43.245
+!MESSAGE Designer [1.10.0.201812270937.201901232115]: 205 (Unable to parse source.). 
+		button_12.setBorder(__WBP_NO_TYPE_BINDING.swing.BorderFactory.createEmptyBorder()); line: 67 The method initialize() from the type AdminLogin is never used locally
+line: 124 __WBP_NO_TYPE_BINDING cannot be resolved
+!STACK 0
+org.eclipse.wb.internal.core.utils.exception.DesignerException: 205 (Unable to parse source.). 
+		button_12.setBorder(__WBP_NO_TYPE_BINDING.swing.BorderFactory.createEmptyBorder()); line: 67 The method initialize() from the type AdminLogin is never used locally
+line: 124 __WBP_NO_TYPE_BINDING cannot be resolved
+	at org.eclipse.wb.internal.core.utils.ast.AstParser.parseStatement(AstParser.java:162)
+	at org.eclipse.wb.internal.core.utils.ast.AstEditor.addStatement(AstEditor.java:1625)
+	at org.eclipse.wb.internal.core.utils.ast.AstEditor.addStatement(AstEditor.java:1579)
+	at org.eclipse.wb.core.model.JavaInfo.addExpressionStatement(JavaInfo.java:987)
+	at org.eclipse.wb.core.model.JavaInfo.addMethodInvocation(JavaInfo.java:951)
+	at org.eclipse.wb.core.model.JavaInfo.addMethodInvocation(JavaInfo.java:926)
+	at org.eclipse.wb.internal.core.model.property.accessor.SetterAccessor$5.run(SetterAccessor.java:147)
+	at org.eclipse.wb.internal.core.utils.execution.ExecutionUtils.run(ExecutionUtils.java:324)
+	at org.eclipse.wb.internal.core.model.property.accessor.SetterAccessor.setExpression(SetterAccessor.java:145)
+	at org.eclipse.wb.internal.core.model.property.GenericPropertyImpl.setExpressionUsingAccessor(GenericPropertyImpl.java:341)
+	at org.eclipse.wb.internal.core.model.property.GenericPropertyImpl.setExpression(GenericPropertyImpl.java:300)
+	at org.eclipse.wb.internal.core.model.clipboard.PropertiesClipboardCommand.execute(PropertiesClipboardCommand.java:62)
+	at org.eclipse.wb.internal.core.model.clipboard.JavaInfoMemento.executeCommands(JavaInfoMemento.java:226)
+	at org.eclipse.wb.internal.core.model.clipboard.JavaInfoMemento.apply(JavaInfoMemento.java:218)
+	at org.eclipse.wb.internal.core.model.clipboard.ComponentInfoMemento.apply(ComponentInfoMemento.java:83)
+	at org.eclipse.wb.internal.core.model.clipboard.JavaInfoMemento.apply(JavaInfoMemento.java:91)
+	at org.eclipse.wb.internal.core.model.util.GlobalStateJava$4$1.executeEdit(GlobalStateJava.java:209)
+	at org.eclipse.wb.core.gef.command.EditCommand$1.run(EditCommand.java:52)
+	at org.eclipse.wb.internal.core.utils.execution.ExecutionUtils.run(ExecutionUtils.java:324)
+	at org.eclipse.wb.core.gef.command.EditCommand.execute(EditCommand.java:50)
+	at org.eclipse.wb.internal.gef.core.CompoundCommand.execute(CompoundCommand.java:89)
+	at org.eclipse.wb.core.gef.command.CompoundEditCommand.access$0(CompoundEditCommand.java:1)
+	at org.eclipse.wb.core.gef.command.CompoundEditCommand$1.run(CompoundEditCommand.java:47)
+	at org.eclipse.wb.internal.core.utils.execution.ExecutionUtils.run(ExecutionUtils.java:324)
+	at org.eclipse.wb.core.gef.command.CompoundEditCommand.execute(CompoundEditCommand.java:45)
+	at org.eclipse.wb.internal.gef.core.EditDomain.executeCommand(EditDomain.java:59)
+	at org.eclipse.wb.gef.core.tools.Tool.executeCommand(Tool.java:209)
+	at org.eclipse.wb.gef.core.tools.AbstractCreationTool.handleButtonUp(AbstractCreationTool.java:62)
+	at org.eclipse.wb.gef.core.tools.Tool.mouseUp(Tool.java:395)
+	at org.eclipse.wb.internal.gef.core.EditDomain.mouseUp(EditDomain.java:255)
+	at org.eclipse.wb.internal.gef.graphical.EditEventManager.mouseUp(EditEventManager.java:149)
+	at sun.reflect.GeneratedMethodAccessor248.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.wb.internal.draw2d.EventManager$8.invoke(EventManager.java:325)
+	at com.sun.proxy.$Proxy20.mouseUp(Unknown Source)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:224)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
+Caused by: org.eclipse.wb.internal.core.utils.exception.DesignerException: 205 (Unable to parse source.). package View;
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import java.awt.Window.Type;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Cursor;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.ImageIcon;
+import javax.swing.JSeparator;
+import java.awt.Font;
+import java.awt.Panel;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import java.awt.SystemColor;
+import java.awt.FlowLayout;
+import java.awt.CardLayout;
+import java.awt.event.ActionListener;
+import java.util.Locale.Category;
+import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+class AdminLogin {
+javax.swing.JFrame frame=(javax.swing.JFrame) null;
+javax.swing.JTextField textField=(javax.swing.JTextField) null;
+javax.swing.JPasswordField passwordField=(javax.swing.JPasswordField) null;
+javax.swing.JPanel home=(javax.swing.JPanel) null;
+javax.swing.JPanel Plats=(javax.swing.JPanel) null;
+javax.swing.JTextField textField_1=(javax.swing.JTextField) null;
+javax.swing.JTextField textField_2=(javax.swing.JTextField) null;
+javax.swing.JTextField textField_3=(javax.swing.JTextField) null;
+javax.swing.JTextField textField_4=(javax.swing.JTextField) null;
+javax.swing.JTable table=(javax.swing.JTable) null;
+javax.swing.JTextField textField_5=(javax.swing.JTextField) null;
+javax.swing.JTextField textField_6=(javax.swing.JTextField) null;
+javax.swing.JTable table_1=(javax.swing.JTable) null;
+javax.swing.JPanel platsPanel=(javax.swing.JPanel) null;
+javax.swing.JPanel CategoriePanel=(javax.swing.JPanel) null;
+javax.swing.JTextField textField_7=(javax.swing.JTextField) null;
+javax.swing.JTextField textField_8=(javax.swing.JTextField) null;
+javax.swing.JTextField textField_9=(javax.swing.JTextField) null;
+javax.swing.JTextField textField_10=(javax.swing.JTextField) null;
+javax.swing.JTextField textField_11=(javax.swing.JTextField) null;
+javax.swing.JTextField textField_12=(javax.swing.JTextField) null;
+javax.swing.JTextField textField_13=(javax.swing.JTextField) null;
+javax.swing.JTable table_2=(javax.swing.JTable) null;
+javax.swing.JPanel Serveurs=(javax.swing.JPanel) null;
+javax.swing.JTextField textField_14=(javax.swing.JTextField) null;
+javax.swing.JTextField textField_15=(javax.swing.JTextField) null;
+javax.swing.JTable table_3=(javax.swing.JTable) null;
+javax.swing.JPanel Tables=(javax.swing.JPanel) null;
+java.sql.Connection con=(java.sql.Connection) null;
+java.sql.Statement stm=(java.sql.Statement) null;
+java.sql.ResultSet rs=(java.sql.ResultSet) null;
+public static void main(String[] args) {}
+private void initialize() {}
+AdminLogin(Object __wbp_param) {
+super();javax.swing.JPanel AdminLoginPanel = (javax.swing.JPanel) null;
+javax.swing.JPanel Left = (javax.swing.JPanel) null;
+javax.swing.JLabel lblNewLabel_2 = (javax.swing.JLabel) null;
+javax.swing.JSeparator separator = (javax.swing.JSeparator) null;
+javax.swing.JSeparator separator_1 = (javax.swing.JSeparator) null;
+javax.swing.JLabel lblNewLabel_3 = (javax.swing.JLabel) null;
+javax.swing.JPanel right = (javax.swing.JPanel) null;
+javax.swing.JLabel lblNewLabel = (javax.swing.JLabel) null;
+javax.swing.JLabel lblMotDePasse = (javax.swing.JLabel) null;
+javax.swing.JLabel lblNewLabel_1 = (javax.swing.JLabel) null;
+javax.swing.JSeparator separator_2 = (javax.swing.JSeparator) null;
+javax.swing.JSeparator separator_3 = (javax.swing.JSeparator) null;
+javax.swing.JButton btnNewButton = (javax.swing.JButton) null;
+javax.swing.JLabel lblNewLabel_4 = (javax.swing.JLabel) null;
+javax.swing.JPanel panel_1 = (javax.swing.JPanel) null;
+javax.swing.JLabel lblNewLabel_5 = (javax.swing.JLabel) null;
+javax.swing.JLabel lblNewLabel_6 = (javax.swing.JLabel) null;
+javax.swing.JLabel lblNewLabel_7 = (javax.swing.JLabel) null;
+javax.swing.JSeparator separator_4 = (javax.swing.JSeparator) null;
+javax.swing.JSeparator separator_5 = (javax.swing.JSeparator) null;
+javax.swing.JPanel panel_2 = (javax.swing.JPanel) null;
+javax.swing.JButton btnNewButton_2 = (javax.swing.JButton) null;
+javax.swing.JButton btnServeur = (javax.swing.JButton) null;
+javax.swing.JButton btnTables = (javax.swing.JButton) null;
+javax.swing.JButton btnNewButton_1 = (javax.swing.JButton) null;
+javax.swing.JPanel panel_3 = (javax.swing.JPanel) null;
+javax.swing.JButton btnNewButton_3 = (javax.swing.JButton) null;
+javax.swing.JButton btnCategorie = (javax.swing.JButton) null;
+javax.swing.JButton btnNewButton_4 = (javax.swing.JButton) null;
+javax.swing.JSeparator separator_6 = (javax.swing.JSeparator) null;
+javax.swing.JSeparator separator_7 = (javax.swing.JSeparator) null;
+javax.swing.JPanel panel_4 = (javax.swing.JPanel) null;
+javax.swing.JPanel panel_5 = (javax.swing.JPanel) null;
+javax.swing.JLabel lblNewLabel_8 = (javax.swing.JLabel) null;
+javax.swing.JLabel lblNewLabel_9 = (javax.swing.JLabel) null;
+javax.swing.JLabel lblNewLabel_10 = (javax.swing.JLabel) null;
+javax.swing.JLabel lblNewLabel_11 = (javax.swing.JLabel) null;
+javax.swing.JLabel lblNewLabel_12 = (javax.swing.JLabel) null;
+javax.swing.JButton btnNewButton_5 = (javax.swing.JButton) null;
+javax.swing.JButton btnNewButton_6 = (javax.swing.JButton) null;
+javax.swing.JButton btnNewButton_7 = (javax.swing.JButton) null;
+javax.swing.JButton btnNewButton_8 = (javax.swing.JButton) null;
+javax.swing.JScrollPane scrollPane = (javax.swing.JScrollPane) null;
+javax.swing.JButton btnNewButton_11 = (javax.swing.JButton) null;
+javax.swing.JLabel label = (javax.swing.JLabel) null;
+javax.swing.JLabel lblLibelle = (javax.swing.JLabel) null;
+javax.swing.JPanel panel_6 = (javax.swing.JPanel) null;
+javax.swing.JLabel lblCategories = (javax.swing.JLabel) null;
+javax.swing.JScrollPane scrollPane_1 = (javax.swing.JScrollPane) null;
+javax.swing.JButton button = (javax.swing.JButton) null;
+javax.swing.JButton button_1 = (javax.swing.JButton) null;
+javax.swing.JButton button_2 = (javax.swing.JButton) null;
+javax.swing.JButton button_3 = (javax.swing.JButton) null;
+javax.swing.JButton button_12 = (javax.swing.JButton) null;
+
+		button_12.setBorder(__WBP_NO_TYPE_BINDING.swing.BorderFactory.createEmptyBorder());}
+} line: 67 The method initialize() from the type AdminLogin is never used locally
+line: 124 __WBP_NO_TYPE_BINDING cannot be resolved
+	at org.eclipse.wb.internal.core.utils.ast.AstParser.findNode(AstParser.java:773)
+	at org.eclipse.wb.internal.core.utils.ast.AstParser.parseStatement(AstParser.java:159)
+	... 62 more
+Caused by: org.eclipse.wb.internal.core.utils.check.AssertionFailedException: null argument
+	at org.eclipse.wb.internal.core.utils.check.Assert.fail(Assert.java:225)
+	at org.eclipse.wb.internal.core.utils.check.Assert.isNotNull(Assert.java:174)
+	at org.eclipse.wb.internal.core.utils.check.Assert.isNotNull(Assert.java:159)
+	at org.eclipse.wb.internal.core.utils.ast.AstParser$3.postVisit(AstParser.java:957)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2818)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChildren(ASTNode.java:2886)
+	at org.eclipse.jdt.core.dom.MethodInvocation.accept0(MethodInvocation.java:228)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2815)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChild(ASTNode.java:2863)
+	at org.eclipse.jdt.core.dom.ExpressionStatement.accept0(ExpressionStatement.java:136)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:2815)
+	at org.eclipse.wb.internal.core.utils.ast.AstParser.copyBindings(AstParser.java:925)
+	at org.eclipse.wb.internal.core.utils.ast.AstParser.findNode0(AstParser.java:827)
+	at org.eclipse.wb.internal.core.utils.ast.AstParser.findNode(AstParser.java:770)
+	... 63 more
+
+!ENTRY org.eclipse.ui 4 0 2019-01-24 14:36:43.265
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.reflect.UndeclaredThrowableException
+	at com.sun.proxy.$Proxy20.mouseUp(Unknown Source)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:224)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1501)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.GeneratedMethodAccessor248.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.wb.internal.draw2d.EventManager$8.invoke(EventManager.java:325)
+	... 28 more
+Caused by: org.eclipse.core.runtime.AssertionFailedException: null argument:
+	at org.eclipse.core.runtime.Assert.isNotNull(Assert.java:88)
+	at org.eclipse.core.runtime.Assert.isNotNull(Assert.java:76)
+	at org.eclipse.wb.internal.gef.core.AbstractEditPartViewer.setSelection(AbstractEditPartViewer.java:249)
+	at org.eclipse.wb.gef.core.tools.PasteTool.selectAddedObjects(PasteTool.java:78)
+	at org.eclipse.wb.gef.core.tools.AbstractCreationTool.handleButtonUp(AbstractCreationTool.java:63)
+	at org.eclipse.wb.gef.core.tools.Tool.mouseUp(Tool.java:395)
+	at org.eclipse.wb.internal.gef.core.EditDomain.mouseUp(EditDomain.java:255)
+	at org.eclipse.wb.internal.gef.graphical.EditEventManager.mouseUp(EditEventManager.java:149)
+	... 32 more

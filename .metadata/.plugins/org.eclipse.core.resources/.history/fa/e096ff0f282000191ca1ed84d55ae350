@@ -1,0 +1,19 @@
+package Model;
+
+public class Plats {
+	private int code;
+	private String nom;
+	private double prix;
+	private String categorie;
+	
+	public Plats(int code, String nom, double prix, String categorie) {
+		super();
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		this.categorie = categorie;
+	}
+	
+	
+
+}

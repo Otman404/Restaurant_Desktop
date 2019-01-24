@@ -182,6 +182,16 @@ public class AdminLogin {
 		right.add(passwordField);
 		
 		JButton btnNewButton = new JButton("Se Connecter");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnNewButton.setBackground(new Color(255, 107, 129));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton.setBackground(new Color(235, 77, 75));
+			}
+		});
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -533,6 +543,21 @@ public class AdminLogin {
 		platsPanel.add(btnNewButton_5);
 		
 		JButton btnNewButton_6 = new JButton("Modifier");
+		btnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+					stm.executeUpdate("update Plate set NomPlate = '"+textField_2.getText()+"',PrixPlate="+Double.parseDouble(textField_3.getText())+",CodeCat='"+textField_4.getText()+"' where CodePlat="+Integer.parseInt(textField_1.getText()));
+					JOptionPane.showMessageDialog(frame,"Le Plat avec le code "+textField_1.getText()+" a été modifié");
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
 		btnNewButton_6.setBackground(new Color(255, 71, 87));
 		btnNewButton_6.setForeground(Color.WHITE);
 		btnNewButton_6.setBounds(515, 503, 117, 35);
@@ -546,8 +571,18 @@ public class AdminLogin {
 					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
-				    stm.executeUpdate("delete from Plate where CodePlat = '"+textField_1.getText()+"'");
-				    JOptionPane.showMessageDialog(frame,"Plat Supprimé");
+					if(textField_1.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(frame,"Veuillez entrer le code du plat a supprimé");
+					}else {
+						rs = stm.executeQuery("select * from Plate where CodePlat = '"+textField_1.getText()+"'");
+						if(rs.next()) {
+							stm.executeUpdate("delete from Plate where CodePlat = '"+textField_1.getText()+"'");
+							JOptionPane.showMessageDialog(frame,"Plat Supprimé");						
+						}else {
+							JOptionPane.showMessageDialog(frame,"Plat n'existe pas.");
+						}
+					}
+								
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
@@ -566,6 +601,7 @@ public class AdminLogin {
 		platsPanel.add(btnNewButton_8);
 		
 		textField_1 = new JTextField();
+		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_1.setForeground(new Color(235, 77, 75));
 		textField_1.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 17));
 		textField_1.setBounds(165, 260, 171, 32);
@@ -573,6 +609,7 @@ public class AdminLogin {
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
+		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_2.setForeground(new Color(235, 77, 75));
 		textField_2.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 17));
 		textField_2.setColumns(10);
@@ -580,6 +617,7 @@ public class AdminLogin {
 		platsPanel.add(textField_2);
 		
 		textField_3 = new JTextField();
+		textField_3.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_3.setForeground(new Color(235, 77, 75));
 		textField_3.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 17));
 		textField_3.setColumns(10);
@@ -587,6 +625,7 @@ public class AdminLogin {
 		platsPanel.add(textField_3);
 		
 		textField_4 = new JTextField();
+		textField_4.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_4.setForeground(new Color(235, 77, 75));
 		textField_4.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 17));
 		textField_4.setColumns(10);
@@ -606,6 +645,53 @@ public class AdminLogin {
 			}
 		));
 		scrollPane.setViewportView(table);
+		
+		JButton btnNewButton_11 = new JButton("");
+		btnNewButton_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+				    rs = stm.executeQuery("select * from Plate where CodePlat = "+Integer.parseInt(textField_1.getText()));
+				    if(rs.next()) {
+						textField_1.setText(rs.getString(1));
+						textField_2.setText(rs.getString(2));
+						textField_3.setText(rs.getString(3));
+						textField_4.setText(rs.getString(4));
+											
+					}else {
+						JOptionPane.showMessageDialog(frame,"Plat n'existe pas.");
+						textField_1.setText("");
+						textField_2.setText("");
+						textField_3.setText("");
+						textField_4.setText("");
+					}
+				    	
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
+		btnNewButton_11.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnNewButton_11.setBackground(new Color(241, 242, 246));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_11.setBackground(Color.WHITE);
+			}
+		});
+		btnNewButton_11.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		btnNewButton_11.setFocusPainted(false);
+
+		btnNewButton_11.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\magnifier.png"));
+		btnNewButton_11.setBackground(Color.WHITE);
+		btnNewButton_11.setBounds(335, 260, 39, 32);
+		platsPanel.add(btnNewButton_11);
 		
 		CategoriePanel = new JPanel();
 		CategoriePanel.setBackground(Color.WHITE);
@@ -688,17 +774,60 @@ public class AdminLogin {
 		button_3.setBounds(771, 503, 117, 35);
 		CategoriePanel.add(button_3);
 		
+		JButton btnNewButton_12 = new JButton("");
+		btnNewButton_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+				    rs = stm.executeQuery("select * from Categorie where CodeCat = '"+textField_5.getText()+"'");
+				    if(rs.next()) {
+						textField_5.setText(rs.getString(1));
+						textField_6.setText(rs.getString(2));
+					}else {
+						JOptionPane.showMessageDialog(frame,"Categorie n'existe pas.");
+						textField_5.setText("");
+						textField_6.setText("");
+					}
+				    	
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
+		btnNewButton_12.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnNewButton_12.setBackground(new Color(241, 242, 246));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_12.setBackground(Color.WHITE);
+			}
+		});
+		btnNewButton_12.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		btnNewButton_12.setFocusPainted(false);
+
+		btnNewButton_12.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\magnifier.png"));
+		btnNewButton_12.setBackground(Color.WHITE);
+		btnNewButton_12.setBounds(335, 260, 39, 32);
+		CategoriePanel.add(btnNewButton_12);
+		
 		Serveurs = new JPanel();
 		Serveurs.setBackground(Color.WHITE);
 		frame.getContentPane().add(Serveurs, "name_618400822586100");
 		Serveurs.setLayout(null);
 		
-		JLabel lblNumero = new JLabel("Num\u00E9ro");
+		JLabel lblNumero = new JLabel("ID");
 		lblNumero.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 20));
 		lblNumero.setBounds(127, 241, 95, 39);
 		Serveurs.add(lblNumero);
 		
 		textField_7 = new JTextField();
+		textField_7.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_7.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 17));
 		textField_7.setForeground(new Color(235, 77, 75));
 		textField_7.setColumns(10);
@@ -711,6 +840,7 @@ public class AdminLogin {
 		Serveurs.add(lblNom);
 		
 		textField_8 = new JTextField();
+		textField_8.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_8.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 17));
 		textField_8.setForeground(new Color(235, 77, 75));
 		textField_8.setColumns(10);
@@ -723,6 +853,7 @@ public class AdminLogin {
 		Serveurs.add(lblPrenom);
 		
 		textField_9 = new JTextField();
+		textField_9.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_9.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 17));
 		textField_9.setForeground(new Color(235, 77, 75));
 		textField_9.setColumns(10);
@@ -745,6 +876,7 @@ public class AdminLogin {
 		Serveurs.add(lblActif);
 		
 		textField_10 = new JTextField();
+		textField_10.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_10.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 17));
 		textField_10.setForeground(new Color(235, 77, 75));
 		textField_10.setColumns(10);
@@ -752,6 +884,7 @@ public class AdminLogin {
 		Serveurs.add(textField_10);
 		
 		textField_11 = new JTextField();
+		textField_11.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_11.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 17));
 		textField_11.setForeground(new Color(235, 77, 75));
 		textField_11.setColumns(10);
@@ -759,6 +892,7 @@ public class AdminLogin {
 		Serveurs.add(textField_11);
 		
 		textField_12 = new JTextField();
+		textField_12.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_12.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 17));
 		textField_12.setForeground(new Color(235, 77, 75));
 		textField_12.setColumns(10);
@@ -771,6 +905,7 @@ public class AdminLogin {
 		Serveurs.add(lblNbrReservation);
 		
 		textField_13 = new JTextField();
+		textField_13.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_13.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 17));
 		textField_13.setForeground(new Color(235, 77, 75));
 		textField_13.setColumns(10);
@@ -852,6 +987,56 @@ public class AdminLogin {
 		button_7.setBounds(999, 599, 140, 35);
 		Serveurs.add(button_7);
 		
+		JButton btnNewButton_13 = new JButton("");
+		btnNewButton_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+				    rs = stm.executeQuery("select * from Serveur where IDSer = "+Integer.parseInt(textField_7.getText()));
+				    if(rs.next()) {
+						textField_7.setText(rs.getString(1));
+						textField_8.setText(rs.getString(2));
+						textField_9.setText(rs.getString(3));
+						textField_10.setText(rs.getString(4));
+						textField_11.setText(rs.getString(5));
+						textField_12.setText(rs.getString(6));
+						textField_13.setText(rs.getString(7));										
+					}else {
+						JOptionPane.showMessageDialog(frame,"Serveur avec cet ID n'existe pas.");
+						textField_7.setText("");
+						textField_8.setText("");
+						textField_9.setText("");
+						textField_10.setText("");
+						textField_11.setText("");
+						textField_12.setText("");
+						textField_13.setText("");
+					}				    	
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
+		btnNewButton_13.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnNewButton_13.setBackground(new Color(241, 242, 246));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_13.setBackground(Color.WHITE);
+			}
+		});
+		btnNewButton_13.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		btnNewButton_13.setFocusPainted(false);
+		btnNewButton_13.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\magnifier.png"));
+		btnNewButton_13.setBackground(Color.WHITE);
+		btnNewButton_13.setBounds(453, 246, 39, 32);
+		Serveurs.add(btnNewButton_13);
+		
 		Tables = new JPanel();
 		Tables.setBackground(Color.WHITE);
 		frame.getContentPane().add(Tables, "name_625568824359500");
@@ -906,6 +1091,7 @@ public class AdminLogin {
 		Tables.add(lblCapacit);
 		
 		textField_14 = new JTextField();
+		textField_14.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_14.setForeground(new Color(235, 77, 75));
 		textField_14.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 17));
 		textField_14.setColumns(10);
@@ -913,6 +1099,7 @@ public class AdminLogin {
 		Tables.add(textField_14);
 		
 		textField_15 = new JTextField();
+		textField_15.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_15.setForeground(new Color(235, 77, 75));
 		textField_15.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 17));
 		textField_15.setColumns(10);
@@ -956,5 +1143,24 @@ public class AdminLogin {
 		button_11.setBackground(new Color(255, 71, 87));
 		button_11.setBounds(1007, 448, 124, 35);
 		Tables.add(button_11);
+		
+		JButton btnNewButton_14 = new JButton("");
+		btnNewButton_14.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnNewButton_14.setBackground(new Color(241, 242, 246));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnNewButton_14.setBackground(Color.WHITE);
+			}
+		});
+		btnNewButton_14.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		btnNewButton_14.setFocusPainted(false);
+		
+		btnNewButton_14.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\magnifier.png"));
+		btnNewButton_14.setBackground(Color.WHITE);
+		btnNewButton_14.setBounds(458, 303, 39, 32);
+		Tables.add(btnNewButton_14);
 	}
 }
