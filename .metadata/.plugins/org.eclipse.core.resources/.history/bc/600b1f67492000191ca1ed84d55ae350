@@ -842,7 +842,6 @@ public class AdminLogin {
 		JButton btnNewButton_12 = new JButton("");
 		btnNewButton_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!textField_5.getText().isEmpty()) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
 					Connection con=DriverManager.getConnection(  
@@ -861,7 +860,7 @@ public class AdminLogin {
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
-				}}
+				}
 			}
 		});
 		btnNewButton_12.addMouseListener(new MouseAdapter() {

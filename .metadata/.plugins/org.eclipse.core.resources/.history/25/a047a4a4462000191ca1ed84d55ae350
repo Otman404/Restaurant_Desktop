@@ -113,7 +113,7 @@ public class AdminLogin {
 		Left.setLayout(null);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\manager.png"));
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\manager.png"));
 		lblNewLabel_2.setBounds(120, 121, 241, 248);
 		Left.add(lblNewLabel_2);
 		
@@ -247,7 +247,7 @@ public class AdminLogin {
 		panel_1.setLayout(null);
 		
 		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\chef.png"));
+		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\chef.png"));
 		lblNewLabel_5.setBounds(159, 184, 184, 156);
 		panel_1.add(lblNewLabel_5);
 		
@@ -297,7 +297,7 @@ public class AdminLogin {
 			}
 		});
 		btnNewButton_2.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton_2.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\dish.png"));
+		btnNewButton_2.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\dish.png"));
 		btnNewButton_2.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 20));
 		btnNewButton_2.setForeground(Color.WHITE);
 		btnNewButton_2.setBackground(new Color(243, 156, 18));
@@ -322,7 +322,7 @@ public class AdminLogin {
 			}
 		});
 		btnServeur.setHorizontalAlignment(SwingConstants.LEFT);
-		btnServeur.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\waiter.png"));
+		btnServeur.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\waiter.png"));
 		btnServeur.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 20));
 		btnServeur.setForeground(Color.WHITE);
 		btnServeur.setBackground(new Color(243, 156, 18));
@@ -347,7 +347,7 @@ public class AdminLogin {
 			}
 		});
 		btnTables.setHorizontalAlignment(SwingConstants.LEFT);
-		btnTables.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\dinner.png"));
+		btnTables.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\dinner.png"));
 		btnTables.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 20));
 		btnTables.setForeground(Color.WHITE);
 		btnTables.setBackground(new Color(243, 156, 18));
@@ -407,7 +407,7 @@ public class AdminLogin {
 				platsPanel.setVisible(true);
 			}
 		});
-		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\dish (1).png"));
+		btnNewButton_3.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\dish (1).png"));
 		btnNewButton_3.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 20));
 		btnNewButton_3.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNewButton_3.setBorder(javax.swing.BorderFactory.createEmptyBorder());
@@ -433,7 +433,7 @@ public class AdminLogin {
 				CategoriePanel.setVisible(true);
 			}
 		});
-		btnCategorie.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\salad.png"));
+		btnCategorie.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\salad.png"));
 		btnCategorie.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 20));
 		btnCategorie.setHorizontalAlignment(SwingConstants.LEFT);
 		btnCategorie.setBorder(javax.swing.BorderFactory.createEmptyBorder());
@@ -461,7 +461,7 @@ public class AdminLogin {
 		});
 		btnNewButton_4.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		btnNewButton_4.setBackground(new Color(249, 202, 36));
-		btnNewButton_4.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\left-arrow.png"));
+		btnNewButton_4.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\left-arrow.png"));
 		btnNewButton_4.setBounds(0, 13, 87, 39);
 		panel_3.add(btnNewButton_4);
 		
@@ -494,7 +494,7 @@ public class AdminLogin {
 		panel_5.setLayout(null);
 		
 		JLabel lblNewLabel_8 = new JLabel("Plats");
-		lblNewLabel_8.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\serving-dish.png"));
+		lblNewLabel_8.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\serving-dish.png"));
 		lblNewLabel_8.setForeground(Color.WHITE);
 		lblNewLabel_8.setBackground(Color.WHITE);
 		lblNewLabel_8.setFont(new Font("Tempus Sans ITC", Font.BOLD, 50));
@@ -658,7 +658,6 @@ public class AdminLogin {
 		JButton btnNewButton_11 = new JButton("");
 		btnNewButton_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!textField_1.getText().isEmpty()) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
 					Connection con=DriverManager.getConnection(  
@@ -682,7 +681,7 @@ public class AdminLogin {
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
-				}}
+				}
 			}
 		});
 		btnNewButton_11.addMouseListener(new MouseAdapter() {
@@ -698,7 +697,7 @@ public class AdminLogin {
 		btnNewButton_11.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		btnNewButton_11.setFocusPainted(false);
 
-		btnNewButton_11.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\magnifier.png"));
+		btnNewButton_11.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\magnifier.png"));
 		btnNewButton_11.setBackground(Color.WHITE);
 		btnNewButton_11.setBounds(335, 260, 39, 32);
 		platsPanel.add(btnNewButton_11);
@@ -725,7 +724,7 @@ public class AdminLogin {
 		CategoriePanel.add(panel_6);
 		
 		JLabel lblCategories = new JLabel("  Categories");
-		lblCategories.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\cutlery.png"));
+		lblCategories.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\cutlery.png"));
 		lblCategories.setForeground(Color.WHITE);
 		lblCategories.setFont(new Font("Tempus Sans ITC", Font.BOLD, 50));
 		lblCategories.setBackground(Color.WHITE);
@@ -842,7 +841,6 @@ public class AdminLogin {
 		JButton btnNewButton_12 = new JButton("");
 		btnNewButton_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!textField_5.getText().isEmpty()) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
 					Connection con=DriverManager.getConnection(  
@@ -861,7 +859,7 @@ public class AdminLogin {
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
-				}}
+				}
 			}
 		});
 		btnNewButton_12.addMouseListener(new MouseAdapter() {
@@ -877,7 +875,7 @@ public class AdminLogin {
 		btnNewButton_12.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		btnNewButton_12.setFocusPainted(false);
 
-		btnNewButton_12.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\magnifier.png"));
+		btnNewButton_12.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\magnifier.png"));
 		btnNewButton_12.setBackground(Color.WHITE);
 		btnNewButton_12.setBounds(335, 260, 39, 32);
 		CategoriePanel.add(btnNewButton_12);
@@ -985,7 +983,7 @@ public class AdminLogin {
 		panel.setLayout(null);
 		
 		JLabel lblServeurs = new JLabel(" Serveurs");
-		lblServeurs.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\waiter64.png"));
+		lblServeurs.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\waiter64.png"));
 		lblServeurs.setBounds(444, 67, 302, 66);
 		lblServeurs.setForeground(Color.WHITE);
 		lblServeurs.setFont(new Font("Tempus Sans ITC", Font.BOLD, 50));
@@ -1011,7 +1009,7 @@ public class AdminLogin {
 		});
 		btnNewButton_9.setBackground(new Color(235, 77, 75));
 		btnNewButton_9.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-		btnNewButton_9.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\left-arrow-yellow.png"));
+		btnNewButton_9.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\left-arrow-yellow.png"));
 		btnNewButton_9.setBounds(0, 13, 87, 39);
 		panel.add(btnNewButton_9);
 		
@@ -1116,7 +1114,6 @@ public class AdminLogin {
 		JButton btnNewButton_13 = new JButton("");
 		btnNewButton_13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!textField_7.getText().isEmpty()) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
 					Connection con=DriverManager.getConnection(  
@@ -1144,7 +1141,7 @@ public class AdminLogin {
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
-				}}
+				}
 			}
 		});
 		btnNewButton_13.addMouseListener(new MouseAdapter() {
@@ -1159,7 +1156,7 @@ public class AdminLogin {
 		});
 		btnNewButton_13.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		btnNewButton_13.setFocusPainted(false);
-		btnNewButton_13.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\magnifier.png"));
+		btnNewButton_13.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\magnifier.png"));
 		btnNewButton_13.setBackground(Color.WHITE);
 		btnNewButton_13.setBounds(453, 246, 39, 32);
 		Serveurs.add(btnNewButton_13);
@@ -1176,7 +1173,7 @@ public class AdminLogin {
 		panel_8.setLayout(null);
 		
 		JLabel lblTables = new JLabel("  Tables");
-		lblTables.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\table.png"));
+		lblTables.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\table.png"));
 		lblTables.setForeground(Color.WHITE);
 		lblTables.setFont(new Font("Tempus Sans ITC", Font.BOLD, 50));
 		lblTables.setBackground(Color.WHITE);
@@ -1201,7 +1198,7 @@ public class AdminLogin {
 				home.setVisible(true);
 			}
 		});
-		btnNewButton_10.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\left-arrow-yellow.png"));
+		btnNewButton_10.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\left-arrow-yellow.png"));
 		btnNewButton_10.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		btnNewButton_10.setBackground(new Color(235, 77, 75));
 		btnNewButton_10.setBounds(0, 13, 87, 39);
@@ -1334,7 +1331,6 @@ public class AdminLogin {
 		JButton btnNewButton_14 = new JButton("");
 		btnNewButton_14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!textField_14.getText().isEmpty()) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
 					Connection con=DriverManager.getConnection(  
@@ -1345,7 +1341,7 @@ public class AdminLogin {
 						textField_14.setText(rs.getString(1));
 						textField_15.setText(rs.getString(2));										
 					}else {
-						JOptionPane.showMessageDialog(frame,"Table avec ce numero n'existe pas.");
+						JOptionPane.showMessageDialog(frame,"Plat n'existe pas.");
 						textField_14.setText("");
 						textField_15.setText("");	
 					}
@@ -1353,7 +1349,7 @@ public class AdminLogin {
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
-				}}
+				}
 			}
 		});
 		btnNewButton_14.addMouseListener(new MouseAdapter() {
@@ -1369,7 +1365,7 @@ public class AdminLogin {
 		btnNewButton_14.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		btnNewButton_14.setFocusPainted(false);
 		
-		btnNewButton_14.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Restaurant\\icons\\magnifier.png"));
+		btnNewButton_14.setIcon(new ImageIcon("C:\\Users\\Outhm\\Desktop\\MiniProjet_Java\\Icons\\magnifier.png"));
 		btnNewButton_14.setBackground(Color.WHITE);
 		btnNewButton_14.setBounds(458, 303, 39, 32);
 		Tables.add(btnNewButton_14);

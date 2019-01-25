@@ -658,7 +658,6 @@ public class AdminLogin {
 		JButton btnNewButton_11 = new JButton("");
 		btnNewButton_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!textField_1.getText().isEmpty()) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
 					Connection con=DriverManager.getConnection(  
@@ -682,7 +681,7 @@ public class AdminLogin {
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
-				}}
+				}
 			}
 		});
 		btnNewButton_11.addMouseListener(new MouseAdapter() {
@@ -842,7 +841,6 @@ public class AdminLogin {
 		JButton btnNewButton_12 = new JButton("");
 		btnNewButton_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!textField_5.getText().isEmpty()) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
 					Connection con=DriverManager.getConnection(  
@@ -861,7 +859,7 @@ public class AdminLogin {
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
-				}}
+				}
 			}
 		});
 		btnNewButton_12.addMouseListener(new MouseAdapter() {
@@ -1116,7 +1114,6 @@ public class AdminLogin {
 		JButton btnNewButton_13 = new JButton("");
 		btnNewButton_13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!textField_7.getText().isEmpty()) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
 					Connection con=DriverManager.getConnection(  
@@ -1144,7 +1141,7 @@ public class AdminLogin {
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
-				}}
+				}
 			}
 		});
 		btnNewButton_13.addMouseListener(new MouseAdapter() {
@@ -1334,7 +1331,6 @@ public class AdminLogin {
 		JButton btnNewButton_14 = new JButton("");
 		btnNewButton_14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!textField_14.getText().isEmpty()) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
 					Connection con=DriverManager.getConnection(  
@@ -1353,7 +1349,7 @@ public class AdminLogin {
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
-				}}
+				}
 			}
 		});
 		btnNewButton_14.addMouseListener(new MouseAdapter() {
