@@ -529,9 +529,14 @@ public class AdminLogin {
 					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
-				    stm.executeUpdate("insert into Plate values ('"+textField_1.getText()+"','"+textField_2.getText()+"','"+Double.parseDouble(textField_3.getText())+"','"+textField_4.getText()+"')");
-				    JOptionPane.showMessageDialog(frame,"Plat Ajouté");
-				    con.close();
+					rs = stm.executeQuery("select * from Plate where CodePlat = "+Integer.parseInt(textField_1.getText()));
+					if(rs.next()) {
+						JOptionPane.showMessageDialog(frame,"Plat existe déja");
+					}else {						
+						stm.executeUpdate("insert into Plate values ("+Integer.parseInt(textField_1.getText())+",'"+textField_2.getText()+"','"+Double.parseDouble(textField_3.getText())+"','"+textField_4.getText()+"')");
+				    	JOptionPane.showMessageDialog(frame,"Plat Ajouté");
+				    	con.close();
+					}
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
 				}
@@ -595,6 +600,10 @@ public class AdminLogin {
 		platsPanel.add(btnNewButton_7);
 		
 		JButton btnNewButton_8 = new JButton("Afficher");
+		btnNewButton_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_8.setBackground(new Color(255, 71, 87));
 		btnNewButton_8.setForeground(Color.WHITE);
 		btnNewButton_8.setBounds(773, 503, 117, 35);
@@ -751,18 +760,73 @@ public class AdminLogin {
 		scrollPane_1.setViewportView(table_1);
 		
 		JButton button = new JButton("Ajouter");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+				    stm.executeUpdate("insert into Categorie values ('"+textField_5.getText()+"','"+textField_6.getText()+"')");
+				    JOptionPane.showMessageDialog(frame,"Categorie Ajouté");
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
 		button.setForeground(Color.WHITE);
 		button.setBackground(new Color(255, 71, 87));
 		button.setBounds(386, 503, 117, 35);
 		CategoriePanel.add(button);
 		
 		JButton button_1 = new JButton("Modifier");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+					stm.executeUpdate("update Categorie set LibelleCat = '"+textField_6.getText()+"' where CodeCat='"+textField_5.getText()+"'");
+					JOptionPane.showMessageDialog(frame,"La Categorie avec le code "+textField_5.getText()+" a été modifiée");
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
 		button_1.setForeground(Color.WHITE);
 		button_1.setBackground(new Color(255, 71, 87));
 		button_1.setBounds(513, 503, 117, 35);
 		CategoriePanel.add(button_1);
 		
 		JButton button_2 = new JButton("Supprimer");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+					if(textField_5.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(frame,"Veuillez entrer le code du Categorie a supprimée");
+					}else {
+						rs = stm.executeQuery("select * from Categorie where CodeCat = '"+textField_5.getText()+"'");
+						if(rs.next()) {
+							stm.executeUpdate("delete from Categorie where CodeCat = '"+textField_5.getText()+"'");
+							JOptionPane.showMessageDialog(frame,"Categorie Supprimé");						
+						}else {
+							JOptionPane.showMessageDialog(frame,"Categorie n'existe pas.");
+						}
+					}
+								
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
 		button_2.setForeground(Color.WHITE);
 		button_2.setBackground(new Color(255, 71, 87));
 		button_2.setBounds(642, 503, 117, 35);
@@ -964,18 +1028,78 @@ public class AdminLogin {
 		scrollPane_2.setViewportView(table_2);
 		
 		JButton button_4 = new JButton("Ajouter");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+					rs = stm.executeQuery("select * from Serveur where IDSer = "+Integer.parseInt(textField_7.getText()));
+					if(rs.next()) {
+						JOptionPane.showMessageDialog(frame,"Serveur avec cet ID existe dja");
+					}else {
+						stm.executeUpdate("insert into Serveur values ("+Integer.parseInt(textField_7.getText())+",'"+textField_8.getText()+"','"+textField_9.getText()+"','"+textField_10.getText()+"','"+textField_11.getText()+"','"+textField_12.getText()+"','"+Integer.parseInt(textField_13.getText())+"')");
+						JOptionPane.showMessageDialog(frame,"Serveur Ajouté");
+						con.close();
+					}
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
 		button_4.setForeground(Color.WHITE);
 		button_4.setBackground(new Color(255, 71, 87));
 		button_4.setBounds(545, 599, 140, 35);
 		Serveurs.add(button_4);
 		
 		JButton button_5 = new JButton("Modifier");
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+					stm.executeUpdate("update Serveur set NomSer='"+textField_8.getText()+"',PreNomSer='"+textField_9.getText()+"',login='"+textField_10.getText()+"',password='"+textField_11.getText()+"',actif='"+textField_12.getText()+"',NbrRes="+Integer.parseInt(textField_13.getText())+" where IDSer="+Integer.parseInt(textField_7.getText()));
+					JOptionPane.showMessageDialog(frame,"Le Serveur avec le numero "+textField_7.getText()+" a été modifié");
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
 		button_5.setForeground(Color.WHITE);
 		button_5.setBackground(new Color(255, 71, 87));
 		button_5.setBounds(695, 599, 140, 35);
 		Serveurs.add(button_5);
 		
 		JButton button_6 = new JButton("Supprimer");
+		button_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+					if(textField_7.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(frame,"Veuillez entrer le numero du serveur a supprimé");
+					}else {
+						rs = stm.executeQuery("select * from Serveur where IDSer = "+Integer.parseInt(textField_7.getText()));
+						if(rs.next()) {
+							stm.executeUpdate("delete from Serveur where IDSer = "+Integer.parseInt(textField_7.getText()));
+							JOptionPane.showMessageDialog(frame,"Serveur Supprimé");						
+						}else {
+							JOptionPane.showMessageDialog(frame,"Serveur avec cet ID n'existe pas.");
+						}
+					}
+								
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
 		button_6.setForeground(Color.WHITE);
 		button_6.setBackground(new Color(255, 71, 87));
 		button_6.setBounds(847, 599, 140, 35);
@@ -1121,18 +1245,78 @@ public class AdminLogin {
 		scrollPane_3.setViewportView(table_3);
 		
 		JButton button_8 = new JButton("Ajouter");
+		button_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+					rs = stm.executeQuery("select * from Tables where NumTable = "+Integer.parseInt(textField_14.getText()));
+					if(rs.next()) {
+						JOptionPane.showMessageDialog(frame,"Table avec ce Numero existe déja");
+					}else {				
+						stm.executeUpdate("insert into Tables values ("+Integer.parseInt(textField_14.getText())+","+Integer.parseInt(textField_15.getText())+")");
+						JOptionPane.showMessageDialog(frame,"Table Ajouté");
+						con.close();
+					}
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
 		button_8.setForeground(Color.WHITE);
 		button_8.setBackground(new Color(255, 71, 87));
 		button_8.setBounds(594, 448, 124, 35);
 		Tables.add(button_8);
 		
 		JButton button_9 = new JButton("Modifier");
+		button_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+					stm.executeUpdate("update Tables set NbrPlaceTable = "+Integer.parseInt(textField_15.getText())+" where NumTable="+Integer.parseInt(textField_14.getText()));
+					JOptionPane.showMessageDialog(frame,"La Tables avec le code "+textField_14.getText()+" a été modifiée");
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
 		button_9.setForeground(Color.WHITE);
 		button_9.setBackground(new Color(255, 71, 87));
 		button_9.setBounds(735, 448, 124, 35);
 		Tables.add(button_9);
 		
 		JButton button_10 = new JButton("Supprimer");
+		button_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+					if(textField_14.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(frame,"Veuillez entrer le numero du Table a supprimée");
+					}else {
+						rs = stm.executeQuery("select * from Tables where NumTable = "+Integer.parseInt(textField_14.getText()));
+						if(rs.next()) {
+							stm.executeUpdate("delete from Tables where NumTable = "+Integer.parseInt(textField_14.getText()));
+							JOptionPane.showMessageDialog(frame,"Table Supprimé");						
+						}else {
+							JOptionPane.showMessageDialog(frame,"Table avec ce numero n'existe pas.");
+						}
+					}
+								
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
 		button_10.setForeground(Color.WHITE);
 		button_10.setBackground(new Color(255, 71, 87));
 		button_10.setBounds(871, 448, 124, 35);
@@ -1145,6 +1329,29 @@ public class AdminLogin {
 		Tables.add(button_11);
 		
 		JButton btnNewButton_14 = new JButton("");
+		btnNewButton_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+				    rs = stm.executeQuery("select * from Tables where NumTable = "+Integer.parseInt(textField_14.getText()));
+				    if(rs.next()) {
+						textField_14.setText(rs.getString(1));
+						textField_15.setText(rs.getString(2));										
+					}else {
+						JOptionPane.showMessageDialog(frame,"Plat n'existe pas.");
+						textField_14.setText("");
+						textField_15.setText("");	
+					}
+				    	
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
 		btnNewButton_14.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
