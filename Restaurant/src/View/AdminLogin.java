@@ -1,4 +1,5 @@
 package View;
+import Model.*;
 
 import java.awt.EventQueue;
 
@@ -19,6 +20,8 @@ import java.awt.Panel;
 
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.SystemColor;
 import java.awt.FlowLayout;
 import java.awt.CardLayout;
@@ -35,6 +38,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import net.proteanit.sql.DbUtils;
 
 public class AdminLogin {
 
@@ -47,10 +51,10 @@ public class AdminLogin {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	private JTable table;
+	private JTable PlatsTables;
 	private JTextField textField_5;
 	private JTextField textField_6;
-	private JTable table_1;
+	private JTable categorieTable;
 	private JPanel platsPanel;
 	private JPanel CategoriePanel;
 	private JTextField textField_7;
@@ -60,16 +64,17 @@ public class AdminLogin {
 	private JTextField textField_11;
 	private JTextField textField_12;
 	private JTextField textField_13;
-	private JTable table_2;
-	JPanel Serveurs;
+	private JTable serveurTable;
+	private JPanel Serveurs;
 	private JTextField textField_14;
 	private JTextField textField_15;
-	private JTable table_3;
+	private JTable tablesTable;
 	private JPanel Tables;
 	private Connection con;
 	private Statement stm;
 	private ResultSet rs;
-	
+	private Plats plat;
+	private PlatService platService;
 	
 	/**
 	 * Launch the application.
@@ -535,6 +540,10 @@ public class AdminLogin {
 					}else {						
 						stm.executeUpdate("insert into Plate values ("+Integer.parseInt(textField_1.getText())+",'"+textField_2.getText()+"','"+Double.parseDouble(textField_3.getText())+"','"+textField_4.getText()+"')");
 				    	JOptionPane.showMessageDialog(frame,"Plat Ajouté");
+				    	textField_1.setText("");
+						textField_2.setText("");
+						textField_3.setText("");
+						textField_4.setText("");
 				    	con.close();
 					}
 				}catch(Exception ex) {
@@ -557,6 +566,10 @@ public class AdminLogin {
 					stm=con.createStatement();
 					stm.executeUpdate("update Plate set NomPlate = '"+textField_2.getText()+"',PrixPlate="+Double.parseDouble(textField_3.getText())+",CodeCat='"+textField_4.getText()+"' where CodePlat="+Integer.parseInt(textField_1.getText()));
 					JOptionPane.showMessageDialog(frame,"Le Plat avec le code "+textField_1.getText()+" a été modifié");
+					textField_1.setText("");
+					textField_2.setText("");
+					textField_3.setText("");
+					textField_4.setText("");
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
@@ -579,13 +592,20 @@ public class AdminLogin {
 					if(textField_1.getText().isEmpty()) {
 						JOptionPane.showMessageDialog(frame,"Veuillez entrer le code du plat a supprimé");
 					}else {
-						rs = stm.executeQuery("select * from Plate where CodePlat = '"+textField_1.getText()+"'");
-						if(rs.next()) {
-							stm.executeUpdate("delete from Plate where CodePlat = '"+textField_1.getText()+"'");
-							JOptionPane.showMessageDialog(frame,"Plat Supprimé");						
+					    int response = JOptionPane.showConfirmDialog(null, "Voulez-vous supprimer ce plat ?", "Confirmer",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					    if (response == JOptionPane.YES_OPTION) {
+					    	rs = stm.executeQuery("select * from Plate where CodePlat = '"+textField_1.getText()+"'");
+					    	if(rs.next()) {
+					    		stm.executeUpdate("delete from Plate where CodePlat = '"+textField_1.getText()+"'");
+					    		JOptionPane.showMessageDialog(frame,"Plat Supprimé");
+					    		textField_1.setText("");
+					    		textField_2.setText("");
+					    		textField_3.setText("");
+					    		textField_4.setText("");
 						}else {
 							JOptionPane.showMessageDialog(frame,"Plat n'existe pas.");
 						}
+					}
 					}
 								
 				    con.close();
@@ -602,6 +622,33 @@ public class AdminLogin {
 		JButton btnNewButton_8 = new JButton("Afficher");
 		btnNewButton_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+					rs = stm.executeQuery("select * from Plate");
+//					while(rs.next()) {
+//						plat = new Plats(Integer.parseInt(rs.getString(2)),rs.getString(3),Double.parseDouble(rs.getString(4)),rs.getString(1));
+//						platService.addPlat(plat);
+//					}
+//					DefaultTableModel dtm = (DefaultTableModel) PlatsTables.getModel();
+//					Object[] row = new Object[4];
+//					for(int i = 0 ; i<platService.getListPlat().size();i++) {
+//						row[0] = platService.getPlatById(i).getCode();
+//						row[1] = platService.getPlatById(i).getNom();
+//						row[2] = platService.getPlatById(i).getPrix();
+//						row[3] = platService.getPlatById(i).getCategorie();
+//						dtm.addRow(row);
+//					}
+//					String[] columns = {"Code","Nom","Prix","Categorie"}; 
+//					dtm.setColumnIdentifiers(columns);
+//					PlatsTables.setModel(dtm);
+					PlatsTables.setModel(DbUtils.resultSetToTableModel(rs));
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
 			}
 		});
 		btnNewButton_8.setBackground(new Color(255, 71, 87));
@@ -645,15 +692,15 @@ public class AdminLogin {
 		scrollPane.setBounds(386, 260, 502, 230);
 		platsPanel.add(scrollPane);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
+		PlatsTables = new JTable();
+		PlatsTables.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"Code", "Nom", "Prix", "Categorie"
 			}
 		));
-		scrollPane.setViewportView(table);
+		scrollPane.setViewportView(PlatsTables);
 		
 		JButton btnNewButton_11 = new JButton("");
 		btnNewButton_11.addActionListener(new ActionListener() {
@@ -750,15 +797,15 @@ public class AdminLogin {
 		scrollPane_1.setBounds(386, 260, 502, 230);
 		CategoriePanel.add(scrollPane_1);
 		
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
+		categorieTable = new JTable();
+		categorieTable.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"Libelle", "Code"
 			}
 		));
-		scrollPane_1.setViewportView(table_1);
+		scrollPane_1.setViewportView(categorieTable);
 		
 		JButton button = new JButton("Ajouter");
 		button.addActionListener(new ActionListener() {
@@ -770,6 +817,8 @@ public class AdminLogin {
 					stm=con.createStatement();
 				    stm.executeUpdate("insert into Categorie values ('"+textField_5.getText()+"','"+textField_6.getText()+"')");
 				    JOptionPane.showMessageDialog(frame,"Categorie Ajouté");
+				    textField_5.setText("");
+					textField_6.setText("");
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
@@ -791,7 +840,8 @@ public class AdminLogin {
 					stm=con.createStatement();
 					stm.executeUpdate("update Categorie set LibelleCat = '"+textField_6.getText()+"' where CodeCat='"+textField_5.getText()+"'");
 					JOptionPane.showMessageDialog(frame,"La Categorie avec le code "+textField_5.getText()+" a été modifiée");
-				    con.close();
+					textField_5.setText("");
+					textField_6.setText("");
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
 				}
@@ -813,13 +863,18 @@ public class AdminLogin {
 					if(textField_5.getText().isEmpty()) {
 						JOptionPane.showMessageDialog(frame,"Veuillez entrer le code du Categorie a supprimée");
 					}else {
+					    int response = JOptionPane.showConfirmDialog(null, "Voulez-vous supprimer ce plat ?", "Confirmer",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					    if (response == JOptionPane.YES_OPTION) {
 						rs = stm.executeQuery("select * from Categorie where CodeCat = '"+textField_5.getText()+"'");
 						if(rs.next()) {
 							stm.executeUpdate("delete from Categorie where CodeCat = '"+textField_5.getText()+"'");
-							JOptionPane.showMessageDialog(frame,"Categorie Supprimé");						
+							JOptionPane.showMessageDialog(frame,"Categorie Supprimé");
+							textField_5.setText("");
+							textField_6.setText("");
 						}else {
 							JOptionPane.showMessageDialog(frame,"Categorie n'existe pas.");
 						}
+					    }
 					}
 								
 				    con.close();
@@ -834,6 +889,21 @@ public class AdminLogin {
 		CategoriePanel.add(button_2);
 		
 		JButton button_3 = new JButton("Afficher");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+					rs = stm.executeQuery("select * from Categorie");
+					categorieTable.setModel(DbUtils.resultSetToTableModel(rs));
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
 		button_3.setForeground(Color.WHITE);
 		button_3.setBackground(new Color(255, 71, 87));
 		button_3.setBounds(771, 503, 117, 35);
@@ -1019,15 +1089,15 @@ public class AdminLogin {
 		scrollPane_2.setBounds(545, 246, 603, 340);
 		Serveurs.add(scrollPane_2);
 		
-		table_2 = new JTable();
-		table_2.setModel(new DefaultTableModel(
+		serveurTable = new JTable();
+		serveurTable.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"Numero", "Nom", "Prenom", "Username", "Password", "Actif", "NbrRes"
 			}
 		));
-		scrollPane_2.setViewportView(table_2);
+		scrollPane_2.setViewportView(serveurTable);
 		
 		JButton button_4 = new JButton("Ajouter");
 		button_4.addActionListener(new ActionListener() {
@@ -1043,6 +1113,13 @@ public class AdminLogin {
 					}else {
 						stm.executeUpdate("insert into Serveur values ("+Integer.parseInt(textField_7.getText())+",'"+textField_8.getText()+"','"+textField_9.getText()+"','"+textField_10.getText()+"','"+textField_11.getText()+"','"+textField_12.getText()+"','"+Integer.parseInt(textField_13.getText())+"')");
 						JOptionPane.showMessageDialog(frame,"Serveur Ajouté");
+						textField_7.setText("");
+						textField_8.setText("");
+						textField_9.setText("");
+						textField_10.setText("");
+						textField_11.setText("");
+						textField_12.setText("");
+						textField_13.setText("");
 						con.close();
 					}
 				}catch(Exception ex) {
@@ -1065,6 +1142,13 @@ public class AdminLogin {
 					stm=con.createStatement();
 					stm.executeUpdate("update Serveur set NomSer='"+textField_8.getText()+"',PreNomSer='"+textField_9.getText()+"',login='"+textField_10.getText()+"',password='"+textField_11.getText()+"',actif='"+textField_12.getText()+"',NbrRes="+Integer.parseInt(textField_13.getText())+" where IDSer="+Integer.parseInt(textField_7.getText()));
 					JOptionPane.showMessageDialog(frame,"Le Serveur avec le numero "+textField_7.getText()+" a été modifié");
+					textField_7.setText("");
+					textField_8.setText("");
+					textField_9.setText("");
+					textField_10.setText("");
+					textField_11.setText("");
+					textField_12.setText("");
+					textField_13.setText("");
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
@@ -1087,13 +1171,23 @@ public class AdminLogin {
 					if(textField_7.getText().isEmpty()) {
 						JOptionPane.showMessageDialog(frame,"Veuillez entrer le numero du serveur a supprimé");
 					}else {
+						int response = JOptionPane.showConfirmDialog(null, "Voulez-vous supprimer ce plat ?", "Confirmer",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					    if (response == JOptionPane.YES_OPTION) {
 						rs = stm.executeQuery("select * from Serveur where IDSer = "+Integer.parseInt(textField_7.getText()));
 						if(rs.next()) {
 							stm.executeUpdate("delete from Serveur where IDSer = "+Integer.parseInt(textField_7.getText()));
-							JOptionPane.showMessageDialog(frame,"Serveur Supprimé");						
+							JOptionPane.showMessageDialog(frame,"Serveur Supprimé");
+							textField_7.setText("");
+							textField_8.setText("");
+							textField_9.setText("");
+							textField_10.setText("");
+							textField_11.setText("");
+							textField_12.setText("");
+							textField_13.setText("");
 						}else {
 							JOptionPane.showMessageDialog(frame,"Serveur avec cet ID n'existe pas.");
 						}
+					    }
 					}
 								
 				    con.close();
@@ -1108,6 +1202,21 @@ public class AdminLogin {
 		Serveurs.add(button_6);
 		
 		JButton button_7 = new JButton("Afficher");
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+					rs = stm.executeQuery("select * from Serveur");
+					serveurTable.setModel(DbUtils.resultSetToTableModel(rs));
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
 		button_7.setForeground(Color.WHITE);
 		button_7.setBackground(new Color(255, 71, 87));
 		button_7.setBounds(999, 599, 140, 35);
@@ -1237,15 +1346,15 @@ public class AdminLogin {
 		scrollPane_3.setBounds(594, 271, 537, 164);
 		Tables.add(scrollPane_3);
 		
-		table_3 = new JTable();
-		table_3.setModel(new DefaultTableModel(
+		tablesTable = new JTable();
+		tablesTable.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"Num\u00E9ro", "Nbr de Place"
 			}
 		));
-		scrollPane_3.setViewportView(table_3);
+		scrollPane_3.setViewportView(tablesTable);
 		
 		JButton button_8 = new JButton("Ajouter");
 		button_8.addActionListener(new ActionListener() {
@@ -1261,6 +1370,8 @@ public class AdminLogin {
 					}else {				
 						stm.executeUpdate("insert into Tables values ("+Integer.parseInt(textField_14.getText())+","+Integer.parseInt(textField_15.getText())+")");
 						JOptionPane.showMessageDialog(frame,"Table Ajouté");
+						textField_14.setText("");
+						textField_15.setText("");
 						con.close();
 					}
 				}catch(Exception ex) {
@@ -1283,6 +1394,8 @@ public class AdminLogin {
 					stm=con.createStatement();
 					stm.executeUpdate("update Tables set NbrPlaceTable = "+Integer.parseInt(textField_15.getText())+" where NumTable="+Integer.parseInt(textField_14.getText()));
 					JOptionPane.showMessageDialog(frame,"La Tables avec le code "+textField_14.getText()+" a été modifiée");
+					textField_14.setText("");
+					textField_15.setText("");
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
@@ -1305,13 +1418,18 @@ public class AdminLogin {
 					if(textField_14.getText().isEmpty()) {
 						JOptionPane.showMessageDialog(frame,"Veuillez entrer le numero du Table a supprimée");
 					}else {
+						int response = JOptionPane.showConfirmDialog(null, "Voulez-vous supprimer ce plat ?", "Confirmer",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					    if (response == JOptionPane.YES_OPTION) {
 						rs = stm.executeQuery("select * from Tables where NumTable = "+Integer.parseInt(textField_14.getText()));
 						if(rs.next()) {
 							stm.executeUpdate("delete from Tables where NumTable = "+Integer.parseInt(textField_14.getText()));
-							JOptionPane.showMessageDialog(frame,"Table Supprimé");						
+							JOptionPane.showMessageDialog(frame,"Table Supprimé");
+							textField_14.setText("");
+							textField_15.setText("");
 						}else {
 							JOptionPane.showMessageDialog(frame,"Table avec ce numero n'existe pas.");
 						}
+					    }
 					}
 								
 				    con.close();
@@ -1326,6 +1444,21 @@ public class AdminLogin {
 		Tables.add(button_10);
 		
 		JButton button_11 = new JButton("Afficher");
+		button_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");  
+					Connection con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+					stm=con.createStatement();
+					rs = stm.executeQuery("select * from Tables");
+					tablesTable.setModel(DbUtils.resultSetToTableModel(rs));
+				    con.close();
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame,ex);
+				}
+			}
+		});
 		button_11.setForeground(Color.WHITE);
 		button_11.setBackground(new Color(255, 71, 87));
 		button_11.setBounds(1007, 448, 124, 35);
