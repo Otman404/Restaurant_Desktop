@@ -2,7 +2,8 @@ insert into Categorie values ('A', 'Tajine') ,
                              ('B', 'Brochette') ,
 				             ('C', 'Cousous'),
 					   	     ('D', 'Dessert'),
-						     ('E', 'Entree');
+						     ('E', 'Entree')
+						     ('F', 'Omelette');
 
 insert into Plate values (1,'Tajine de Poulet accompagné d’olives et de citrons confits',275,'A'),
                          (2,'Tajine de Kefta (boulettes de bœuf, œuf)',275,'A'),
@@ -31,7 +32,7 @@ insert into Plate values (1,'Tajine de Poulet accompagné d’olives et de citro
 						 (25,'Salade de lentilles',100,'E'),
 						 (26,'Briouat de poulet(feuilleté marocain)',115,'E'),
 						 (27,'Assortiment d’entrées : salades, briouats, pastillas...',280,'E'),
-						 (28,'Pastilla',450,'E');
+						 (2	,'Pastilla',450,'E');
 
 insert into Tables values (1,5),(2,10),(3,8),(4,15),(5,10),(6,8),(7,15),(8,5),(9,10),(10,15),(11,10),(12,15),(13,10),(14,8),(15,15),
                           (16,5),(17,10),(18,8),(19,15),(20,10),(21,8),(22,15),(23,5),(24,10),(25,15),(26,10),(27,15),(28,10),(29,8),(30,15),
