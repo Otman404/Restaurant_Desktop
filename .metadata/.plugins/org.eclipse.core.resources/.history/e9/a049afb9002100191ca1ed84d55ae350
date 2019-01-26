@@ -410,8 +410,6 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent arg0) {
 				CategoriePanel.setVisible(false);
 				platsPanel.setVisible(true);
-				textField_5.setText("");
-				textField_6.setText("");
 			}
 		});
 		btnNewButton_3.setIcon(new ImageIcon("icons/dish (1).png"));
@@ -438,10 +436,6 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				platsPanel.setVisible(false);
 				CategoriePanel.setVisible(true);
-				textField_1.setText("");
-				textField_2.setText("");
-				textField_3.setText("");
-				textField_4.setText("");
 			}
 		});
 		btnCategorie.setIcon(new ImageIcon("icons/salad.png"));
@@ -1089,13 +1083,6 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				Serveurs.setVisible(false);
 				home.setVisible(true);
-				textField_7.setText("");
-				textField_8.setText("");
-				textField_9.setText("");
-				textField_10.setText("");
-				textField_11.setText("");
-				textField_12.setText("");
-				textField_13.setText("");
 			}
 		});
 		btnNewButton_9.setBackground(new Color(235, 77, 75));
@@ -1327,8 +1314,6 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				Tables.setVisible(false);
 				home.setVisible(true);
-				textField_14.setText("");
-				textField_15.setText("");
 			}
 		});
 		btnNewButton_10.setIcon(new ImageIcon("icons/left-arrow-yellow.png"));

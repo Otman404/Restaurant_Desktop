@@ -201,7 +201,7 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 				    rs=stm.executeQuery("select * from login where username = '"+textField.getText()+"' and password = '"+new String(passwordField.getPassword())+"'");
@@ -410,8 +410,6 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent arg0) {
 				CategoriePanel.setVisible(false);
 				platsPanel.setVisible(true);
-				textField_5.setText("");
-				textField_6.setText("");
 			}
 		});
 		btnNewButton_3.setIcon(new ImageIcon("icons/dish (1).png"));
@@ -438,10 +436,6 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				platsPanel.setVisible(false);
 				CategoriePanel.setVisible(true);
-				textField_1.setText("");
-				textField_2.setText("");
-				textField_3.setText("");
-				textField_4.setText("");
 			}
 		});
 		btnCategorie.setIcon(new ImageIcon("icons/salad.png"));
@@ -468,12 +462,6 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				Plats.setVisible(false);
 				home.setVisible(true);
-				textField_1.setText("");
-				textField_2.setText("");
-				textField_3.setText("");
-				textField_4.setText("");
-				textField_5.setText("");
-				textField_6.setText("");
 			}
 		});
 		btnNewButton_4.setBorder(javax.swing.BorderFactory.createEmptyBorder());
@@ -543,7 +531,7 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 					rs = stm.executeQuery("select * from Plate where CodePlat = "+Integer.parseInt(textField_1.getText()));
@@ -573,7 +561,7 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 					stm.executeUpdate("update Plate set NomPlate = '"+textField_2.getText()+"',PrixPlate="+Double.parseDouble(textField_3.getText())+",CodeCat='"+textField_4.getText()+"' where CodePlat="+Integer.parseInt(textField_1.getText()));
@@ -720,7 +708,7 @@ public class EspaceAdmine {
 				if(!textField_1.getText().isEmpty()) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 				    rs = stm.executeQuery("select * from Plate where CodePlat = "+Integer.parseInt(textField_1.getText()));
@@ -824,7 +812,7 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 				    stm.executeUpdate("insert into Categorie values ('"+textField_5.getText()+"','"+textField_6.getText()+"')");
@@ -847,7 +835,7 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 					stm.executeUpdate("update Categorie set LibelleCat = '"+textField_6.getText()+"' where CodeCat='"+textField_5.getText()+"'");
@@ -869,7 +857,7 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 					if(textField_5.getText().isEmpty()) {
@@ -905,7 +893,7 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 					rs = stm.executeQuery("select * from Categorie");
@@ -927,7 +915,7 @@ public class EspaceAdmine {
 				if(!textField_5.getText().isEmpty()) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 				    rs = stm.executeQuery("select * from Categorie where CodeCat = '"+textField_5.getText()+"'");
@@ -1089,13 +1077,6 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				Serveurs.setVisible(false);
 				home.setVisible(true);
-				textField_7.setText("");
-				textField_8.setText("");
-				textField_9.setText("");
-				textField_10.setText("");
-				textField_11.setText("");
-				textField_12.setText("");
-				textField_13.setText("");
 			}
 		});
 		btnNewButton_9.setBackground(new Color(235, 77, 75));
@@ -1123,7 +1104,7 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 					rs = stm.executeQuery("select * from Serveur where IDSer = "+Integer.parseInt(textField_7.getText()));
@@ -1156,7 +1137,7 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 					stm.executeUpdate("update Serveur set NomSer='"+textField_8.getText()+"',PreNomSer='"+textField_9.getText()+"',login='"+textField_10.getText()+"',password='"+textField_11.getText()+"',actif='"+textField_12.getText()+"',NbrRes="+Integer.parseInt(textField_13.getText())+" where IDSer="+Integer.parseInt(textField_7.getText()));
@@ -1184,7 +1165,7 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 					if(textField_7.getText().isEmpty()) {
@@ -1225,7 +1206,7 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 					rs = stm.executeQuery("select * from Serveur");
@@ -1247,7 +1228,7 @@ public class EspaceAdmine {
 				if(!textField_7.getText().isEmpty()) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 				    rs = stm.executeQuery("select * from Serveur where IDSer = "+Integer.parseInt(textField_7.getText()));
@@ -1327,8 +1308,6 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				Tables.setVisible(false);
 				home.setVisible(true);
-				textField_14.setText("");
-				textField_15.setText("");
 			}
 		});
 		btnNewButton_10.setIcon(new ImageIcon("icons/left-arrow-yellow.png"));
@@ -1383,7 +1362,7 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 					rs = stm.executeQuery("select * from Tables where NumTable = "+Integer.parseInt(textField_14.getText()));
@@ -1411,7 +1390,7 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 					stm.executeUpdate("update Tables set NbrPlaceTable = "+Integer.parseInt(textField_15.getText())+" where NumTable="+Integer.parseInt(textField_14.getText()));
@@ -1434,7 +1413,7 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 					if(textField_14.getText().isEmpty()) {
@@ -1470,7 +1449,7 @@ public class EspaceAdmine {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 					rs = stm.executeQuery("select * from Tables");
@@ -1492,7 +1471,7 @@ public class EspaceAdmine {
 				if(!textField_14.getText().isEmpty()) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
+					Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 					stm=con.createStatement();
 				    rs = stm.executeQuery("select * from Tables where NumTable = "+Integer.parseInt(textField_14.getText()));
