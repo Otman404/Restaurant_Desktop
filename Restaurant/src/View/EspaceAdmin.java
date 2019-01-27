@@ -1,5 +1,10 @@
 package View;
 import Model.*;
+import Model.categories.Categorie;
+import Model.categories.CategorieDaoImp;
+import Model.plats.PlatDaoImpl;
+import Model.plats.PlatService;
+import Model.plats.Plats;
 
 import java.awt.EventQueue;
 
@@ -54,6 +59,8 @@ public class EspaceAdmin {
 	private Plats plat;
 	private PlatService platService;
 	private PlatDaoImpl pdi;
+	private Categorie categorie;
+	private CategorieDaoImp cdi;
 	private JLabel lbladminIcon,PlatsLabel,codePlatLabel,nomPlatLabel,prixPlatLabel,categPlatLabel,codeCategLabel,libelleCategLabel,lblCategories,lblNumero,lblNom,lblPrenom,lblLogin,lblPassword,lblActif,lblNbrReservation,lblServeurs,lblTables,lbNumTable,lblCapacite;
 	private JSeparator separator,separator_1,separator_2,separator_3,separator_4,separator_5,separator_6,separator_7;
 	private JLabel lblTitle,lblAdminUsrname,lblAdminMdp,lblCnctezVs,lblMdpOublie,lblLogo,lblRestName,lblSlogan;
@@ -1644,6 +1651,7 @@ public class EspaceAdmin {
 		categTitlePanel.add(lblCategories);
 		
 		codeCatg_tf = new JTextField();
+		codeCatg_tf.setHorizontalAlignment(SwingConstants.CENTER);
 		codeCatg_tf.setForeground(new Color(235, 77, 75));
 		codeCatg_tf.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 17));
 		codeCatg_tf.setColumns(10);
@@ -1651,6 +1659,7 @@ public class EspaceAdmin {
 		CategoriePanel.add(codeCatg_tf);
 		
 		libelleCateg_tf = new JTextField();
+		libelleCateg_tf.setHorizontalAlignment(SwingConstants.CENTER);
 		libelleCateg_tf.setForeground(new Color(235, 77, 75));
 		libelleCateg_tf.setFont(new Font("Source Sans Pro Semibold", Font.PLAIN, 17));
 		libelleCateg_tf.setColumns(10);
@@ -1670,25 +1679,15 @@ public class EspaceAdmin {
 			}
 		));
 		categTable_JSP.setViewportView(categorieTable);
-		
+		cdi = new CategorieDaoImp(this);
 		ajouterCategBtn = new JButton("Ajouter");
 		ajouterCategBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(isCategEmpty()) {
 					JOptionPane.showMessageDialog(frame,"Veuillez remplir tous les champs");
 				}else {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
-				    stm.executeUpdate("insert into Categorie values ('"+codeCatg_tf.getText()+"','"+libelleCateg_tf.getText()+"')");
-				    JOptionPane.showMessageDialog(frame,"Categorie Ajouté");
-				    clearCategTxtFields();
-				    con.close();
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
-				}	
+					categorie = new Categorie(codeCatg_tf.getText(),libelleCateg_tf.getText());
+					cdi.ajouterCateg(categorie);
 				}
 			}
 		});
@@ -1703,17 +1702,8 @@ public class EspaceAdmin {
 				if(isCategEmpty()) {
 					JOptionPane.showMessageDialog(frame,"Veuillez remplir tous les champs");
 				}else {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
-					stm.executeUpdate("update Categorie set LibelleCat = '"+libelleCateg_tf.getText()+"' where CodeCat='"+codeCatg_tf.getText()+"'");
-					JOptionPane.showMessageDialog(frame,"La Categorie avec le code "+codeCatg_tf.getText()+" a été modifiée");
-					clearCategTxtFields();
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
-				}
+					categorie = new Categorie(codeCatg_tf.getText(), libelleCateg_tf.getText());
+					cdi.updateCateg(categorie);
 				}
 			}
 		});
@@ -1725,30 +1715,37 @@ public class EspaceAdmin {
 		supprCategBtn = new JButton("Supprimer");
 		supprCategBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
-					if(codeCatg_tf.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(frame,"Veuillez entrer le code du Categorie a supprimée");
-					}else {
-					    int response = JOptionPane.showConfirmDialog(null, "Voulez-vous supprimer cette categorie ?", "Confirmer",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-					    if (response == JOptionPane.YES_OPTION) {
-						rs = stm.executeQuery("select * from Categorie where CodeCat = '"+codeCatg_tf.getText()+"'");
-						if(rs.next()) {
-							stm.executeUpdate("delete from Categorie where CodeCat = '"+codeCatg_tf.getText()+"'");
-							JOptionPane.showMessageDialog(frame,"Categorie Supprimé");
-							clearCategTxtFields();
-						}else {
-							JOptionPane.showMessageDialog(frame,"Categorie n'existe pas.");
-						}
-					    }
-					}
-								
-				    con.close();
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
+//				try {
+//					Class.forName("com.mysql.jdbc.Driver");  
+//					con=DriverManager.getConnection(  
+//					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+//					stm=con.createStatement();
+//					if(codeCatg_tf.getText().isEmpty()) {
+//						JOptionPane.showMessageDialog(frame,"Veuillez entrer le code du Categorie a supprimée");
+//					}else {
+//					    int response = JOptionPane.showConfirmDialog(null, "Voulez-vous supprimer cette categorie ?", "Confirmer",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+//					    if (response == JOptionPane.YES_OPTION) {
+//						rs = stm.executeQuery("select * from Categorie where CodeCat = '"+codeCatg_tf.getText()+"'");
+//						if(rs.next()) {
+//							stm.executeUpdate("delete from Categorie where CodeCat = '"+codeCatg_tf.getText()+"'");
+//							JOptionPane.showMessageDialog(frame,"Categorie Supprimé");
+//							clearCategTxtFields();
+//						}else {
+//							JOptionPane.showMessageDialog(frame,"Categorie n'existe pas.");
+//						}
+//					    }
+//					}
+//								
+//				    con.close();
+//				}catch(Exception ex) {
+//					JOptionPane.showMessageDialog(frame,ex);
+//				}
+				if(codeCatg_tf.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(frame,"Veuillez entrer le code du Categorie a supprimée");
+				}else {
+					
+					cdi.deleteCateg(codeCatg_tf.getText());
+					
 				}
 			}
 		});

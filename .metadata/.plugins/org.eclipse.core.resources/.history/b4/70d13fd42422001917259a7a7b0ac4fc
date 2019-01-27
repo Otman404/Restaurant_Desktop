@@ -1,0 +1,25 @@
+package Model.categories;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import Model.plats.Plats;
+
+
+public class CategorieService {
+
+	private List<Categorie> listCateg;
+
+	
+	
+	
+	public List<Categorie> getListCateg() {
+		return listCateg;
+	}
+
+	public void setListCateg(List<Categorie> listCateg) {
+		this.listCateg = listCateg;
+	}
+	
+	
+}

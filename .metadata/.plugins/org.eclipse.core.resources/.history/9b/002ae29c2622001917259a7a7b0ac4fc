@@ -1,0 +1,67 @@
+package Model.categories;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import View.EspaceAdmin;
+
+public class CategorieDaoImp implements CategorieDao{
+
+	private Connection con;
+	private ResultSet rs;
+	private Statement stm;
+	private JFrame frame;
+	private EspaceAdmin espAdmn;
+	public CategorieDaoImp(EspaceAdmin espAdmn) {
+		this.espAdmn = espAdmn;
+	}
+	
+	
+	@Override
+	public void ajouterCateg(Categorie plat) {
+//		try {
+//			Class.forName("com.mysql.jdbc.Driver");  
+//			con=DriverManager.getConnection(  
+//			"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+//			stm=con.createStatement();
+//		    stm.executeUpdate("insert into Categorie values ('"+codeCatg_tf.getText()+"','"+libelleCateg_tf.getText()+"')");
+//		    JOptionPane.showMessageDialog(frame,"Categorie Ajouté");
+//		    clearCategTxtFields();
+//		    con.close();
+//		}catch(Exception ex) {
+//			JOptionPane.showMessageDialog(frame,ex);
+//		}	
+		
+	}
+
+	@Override
+	public Categorie getCategByCode(String codeCateg) {
+		
+		return null;
+	}
+
+	@Override
+	public ArrayList<Categorie> getAllCategs() {
+		
+		return null;
+	}
+
+	@Override
+	public void updateCateg(Categorie categ) {
+		
+		
+	}
+
+	@Override
+	public void deleteCateg(int codeCateg) {
+		
+		
+	}
+
+}

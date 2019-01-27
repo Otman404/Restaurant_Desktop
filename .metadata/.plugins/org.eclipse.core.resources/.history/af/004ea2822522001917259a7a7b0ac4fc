@@ -1,0 +1,37 @@
+package Model.categories;
+
+import java.util.ArrayList;
+
+public class CategorieDaoImp implements CategorieDao{
+
+	@Override
+	public void ajouterCateg(Categorie plat) {
+		
+		
+	}
+
+	@Override
+	public Categorie getCategByCode(String codeCateg) {
+		
+		return null;
+	}
+
+	@Override
+	public ArrayList<Categorie> getAllCategs() {
+		
+		return null;
+	}
+
+	@Override
+	public void updateCateg(Categorie categ) {
+		
+		
+	}
+
+	@Override
+	public void deleteCateg(int codeCateg) {
+		
+		
+	}
+
+}
