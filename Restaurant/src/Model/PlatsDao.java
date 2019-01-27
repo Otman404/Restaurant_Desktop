@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public interface PlatsDao {
-    public void createProduct(Plats plat);
+    public void ajouterPlat(Plats plat);
     public Plats getPlatByCode(int codePlat);
     public ArrayList<Plats> getAllPlats();
     public void updatePlat(Plats plat);
