@@ -1553,33 +1553,7 @@ public class EspaceAdmin {
 		affichierPlatsBtn = new JButton("Afficher");
 		affichierPlatsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					Connection con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
-					rs = stm.executeQuery("select * from Plate");
-//					while(rs.next()) {
-//						plat = new Plats(Integer.parseInt(rs.getString(2)),rs.getString(3),Double.parseDouble(rs.getString(4)),rs.getString(1));
-//						platService.addPlat(plat);
-//					}
-//					DefaultTableModel dtm = (DefaultTableModel) PlatsTables.getModel();
-//					Object[] row = new Object[4];
-//					for(int i = 0 ; i<platService.getListPlat().size();i++) {
-//						row[0] = platService.getPlatById(i).getCode();
-//						row[1] = platService.getPlatById(i).getNom();
-//						row[2] = platService.getPlatById(i).getPrix();
-//						row[3] = platService.getPlatById(i).getCategorie();
-//						dtm.addRow(row);
-//					}
-//					String[] columns = {"Code","Nom","Prix","Categorie"}; 
-//					dtm.setColumnIdentifiers(columns);
-//					PlatsTables.setModel(dtm);
-					PlatsTables.setModel(DbUtils.resultSetToTableModel(rs));
-				    con.close();
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
-				}
+				fillJTable("Plate",PlatsTables);
 			}
 		});
 		affichierPlatsBtn.setBackground(new Color(255, 71, 87));
@@ -1828,17 +1802,7 @@ public class EspaceAdmin {
 		affichCategBtn = new JButton("Afficher");
 		affichCategBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
-					rs = stm.executeQuery("select * from Categorie");
-					categorieTable.setModel(DbUtils.resultSetToTableModel(rs));
-				    con.close();
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
-				}
+				fillJTable("Categorie", categorieTable);
 			}
 		});
 		affichCategBtn.setForeground(Color.WHITE);
@@ -2139,17 +2103,7 @@ public class EspaceAdmin {
 		affichServrBtn = new JButton("Afficher");
 		affichServrBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
-					rs = stm.executeQuery("select * from Serveur");
-					serveurTable.setModel(DbUtils.resultSetToTableModel(rs));
-				    con.close();
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
-				}
+				fillJTable("Serveur", serveurTable);
 			}
 		});
 		affichServrBtn.setForeground(Color.WHITE);
@@ -2390,17 +2344,7 @@ public class EspaceAdmin {
 		affichTableBtn = new JButton("Afficher");
 		affichTableBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
-					rs = stm.executeQuery("select * from Tables");
-					tablesTable.setModel(DbUtils.resultSetToTableModel(rs));
-				    con.close();
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
-				}
+				fillJTable("Tables", tablesTable);
 			}
 		});
 		affichTableBtn.setForeground(Color.WHITE);
@@ -2516,5 +2460,18 @@ public class EspaceAdmin {
 	public void clearTableTxtFields(){
 		tableNum_tf.setText("");
 		tableNbrPlace_tf.setText("");
+	}
+	public void fillJTable(String tableName,JTable jtb){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");  
+			Connection con=DriverManager.getConnection(  
+			"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+			stm=con.createStatement();
+			rs = stm.executeQuery("select * from "+tableName);
+			jtb.setModel(DbUtils.resultSetToTableModel(rs));
+			 con.close();
+		}catch(Exception ex) {
+			JOptionPane.showMessageDialog(frame,ex);
+		}
 	}
 }
