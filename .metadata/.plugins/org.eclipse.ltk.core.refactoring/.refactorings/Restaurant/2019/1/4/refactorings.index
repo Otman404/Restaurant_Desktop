@@ -3,3 +3,11 @@
 1548368603163	Delete element
 1548411874393	Delete element
 1548411928142	Rename type 'AdminLogin'
+1548558308804	Rename resource 'manager.png'
+1548558385674	Rename resource 'chef.png'
+1548558439465	Rename resource 'dinner.png'
+1548558502266	Delete element
+1548558552092	Rename resource 'logout (1).png'
+1548565427796	Rename type 'EspaceAdmine'
+1548577843820	Rename method 'clearTableTxtFields'
+1548583081590	Rename type 'ProductDaoImpl'

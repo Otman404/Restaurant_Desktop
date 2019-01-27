@@ -13,14 +13,16 @@ DELIMITER ;
 
 ------------------------------
 
-DELIMITER $$
-
-CREATE TRIGGER suppr_table
+CREATE TRIGGER suppr_serv
 BEFORE DELETE
-ON Tables
+ON Serveur
 FOR EACH ROW
 BEGIN
-delete from Reservation where Reservation.NumTable = OLD.NumTable
+
+IF OLD.nbrRes > 0 THEN 
+	CALL cannot_delete_error; 
+END IF
+
 END
 $$
 
@@ -62,3 +64,7 @@ END
 $$
 
 DELIMITER ;
+
+
+--------------------------
+

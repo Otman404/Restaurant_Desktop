@@ -1,6 +1,8 @@
 package Model;
 
-import java.util.ArrayList;    
+import java.util.ArrayList;
+
+import View.EspaceAdmin;    
 
 
 public interface PlatsDao {

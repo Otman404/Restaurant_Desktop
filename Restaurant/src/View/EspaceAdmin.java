@@ -53,6 +53,7 @@ public class EspaceAdmin {
 	private ResultSet rs;
 	private Plats plat;
 	private PlatService platService;
+	private PlatDaoImpl pdi;
 	private JLabel lbladminIcon,PlatsLabel,codePlatLabel,nomPlatLabel,prixPlatLabel,categPlatLabel,codeCategLabel,libelleCategLabel,lblCategories,lblNumero,lblNom,lblPrenom,lblLogin,lblPassword,lblActif,lblNbrReservation,lblServeurs,lblTables,lbNumTable,lblCapacite;
 	private JSeparator separator,separator_1,separator_2,separator_3,separator_4,separator_5,separator_6,separator_7;
 	private JLabel lblTitle,lblAdminUsrname,lblAdminMdp,lblCnctezVs,lblMdpOublie,lblLogo,lblRestName,lblSlogan;
@@ -1459,28 +1460,14 @@ public class EspaceAdmin {
 		categPlatLabel.setBounds(59, 449, 95, 33);
 		platsPanel.add(categPlatLabel);
 		ajouterPlatBtn = new JButton("Ajouter");
+		pdi = new PlatDaoImpl(this);
 		ajouterPlatBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(isPlatsEmpty()) {
 					JOptionPane.showMessageDialog(frame,"Veuillez remplir tous les champs");
 				}else {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
-					rs = stm.executeQuery("select * from Plate where CodePlat = "+Integer.parseInt(codePlat_tf.getText()));
-					if(rs.next()) {
-						JOptionPane.showMessageDialog(frame,"Plat existe déja");
-					}else {						
-						stm.executeUpdate("insert into Plate values ("+Integer.parseInt(codePlat_tf.getText())+",'"+nomPlat_tf.getText()+"','"+Double.parseDouble(prixPlat_tf.getText())+"','"+categPlat_tf.getText()+"')");
-				    	JOptionPane.showMessageDialog(frame,"Plat Ajouté");
-				    	clearPlatTxtFields();
-				    	con.close();
-					}
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
-				}
+					plat = new Plats(Integer.parseInt(codePlat_tf.getText()), nomPlat_tf.getText(), Double.parseDouble(prixPlat_tf.getText()), categPlat_tf.getText());
+					pdi.ajouterPlat(plat);
 				}
 			}
 		});
@@ -1495,18 +1482,8 @@ public class EspaceAdmin {
 				if(isPlatsEmpty()) {
 					JOptionPane.showMessageDialog(frame,"Veuillez remplir tous les champs");
 				}else {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
-					stm.executeUpdate("update Plate set NomPlate = '"+nomPlat_tf.getText()+"',PrixPlate="+Double.parseDouble(prixPlat_tf.getText())+",CodeCat='"+categPlat_tf.getText()+"' where CodePlat="+Integer.parseInt(codePlat_tf.getText()));
-					JOptionPane.showMessageDialog(frame,"Le Plat avec le code "+codePlat_tf.getText()+" a été modifié");
-					clearPlatTxtFields();
-				    con.close();
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
-				}
+				plat = new Plats(Integer.parseInt(codePlat_tf.getText()), nomPlat_tf.getText(), Double.parseDouble(prixPlat_tf.getText()), categPlat_tf.getText());
+				pdi.updatePlat(plat);
 				}
 			}
 		});
@@ -1518,30 +1495,11 @@ public class EspaceAdmin {
 		supprimerPlatBtn = new JButton("Supprimer");
 		supprimerPlatBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					Connection con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
-					if(codePlat_tf.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(frame,"Veuillez entrer le code du plat a supprimé");
-					}else {
-					    int response = JOptionPane.showConfirmDialog(null, "Voulez-vous supprimer ce plat ?", "Confirmer",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-					    if (response == JOptionPane.YES_OPTION) {
-					    	rs = stm.executeQuery("select * from Plate where CodePlat = '"+codePlat_tf.getText()+"'");
-					    	if(rs.next()) {
-					    		stm.executeUpdate("delete from Plate where CodePlat = '"+codePlat_tf.getText()+"'");
-					    		JOptionPane.showMessageDialog(frame,"Plat Supprimé");
-					    		clearPlatTxtFields();
-						}else {
-							JOptionPane.showMessageDialog(frame,"Plat n'existe pas.");
-						}
-					}
-					}
-								
-				    con.close();
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
+				if(codePlat_tf.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(frame,"Veuillez entrer le code du plat a supprimé");
+				}else {
+					pdi.deletePlat(Integer.parseInt(codePlat_tf.getText()));
+					
 				}
 			}
 		});

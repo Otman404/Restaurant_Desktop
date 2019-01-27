@@ -1,6 +1,5 @@
 package Model;
 
-import View.EspaceAdmin;
 
 public class Plats {
 	private int code;
@@ -14,12 +13,6 @@ public class Plats {
 		this.prix = prix;
 		this.categorie = categorie;
 	}
-//	public Plats(EspaceAdmin espAdmn) {
-//		this.code = Integer.parseInt(espAdmn.getCodePlat_tf().getText());
-//		this.nom = espAdmn.getNomPlat_tf().getText();
-//		this.prix = Double.parseDouble(espAdmn.getPrixPlat_tf().getText());
-//		this.categorie = espAdmn.getCategPlat_tf().getText();
-//	}
 
 	public int getCode() {
 		return code;
