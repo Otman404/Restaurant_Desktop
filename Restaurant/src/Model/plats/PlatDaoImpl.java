@@ -65,10 +65,16 @@ public class PlatDaoImpl implements PlatsDao{
 			con=DriverManager.getConnection(  
 			"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 			stm=con.createStatement();
-			stm.executeUpdate("update Plate set NomPlate = '"+plat.getNom()+"',PrixPlate="+plat.getPrix()+",CodeCat='"+plat.getCategorie()+"' where CodePlat="+plat.getCode());
-			JOptionPane.showMessageDialog(frame,"Le Plat avec le code "+plat.getCode()+" a été modifié");
-			espAdmn.clearPlatTxtFields();
-		    con.close();
+			rs = stm.executeQuery("select * from Plate where CodePlat ="+plat.getCode());
+			if(!rs.next()) {
+				JOptionPane.showMessageDialog(frame,"Plat avec ce code n'existe pas.");
+			}else {
+				stm.executeUpdate("update Plate set NomPlate = '"+plat.getNom()+"',PrixPlate="+plat.getPrix()+",CodeCat='"+plat.getCategorie()+"' where CodePlat="+plat.getCode());
+				JOptionPane.showMessageDialog(frame,"Le Plat avec le code "+plat.getCode()+" a été modifié");
+				espAdmn.clearPlatTxtFields();
+		    	con.close();
+			}
+			
 		}catch(Exception ex) {
 			JOptionPane.showMessageDialog(frame,ex);
 		}				

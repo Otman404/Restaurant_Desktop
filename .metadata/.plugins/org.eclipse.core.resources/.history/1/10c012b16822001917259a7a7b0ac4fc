@@ -1,0 +1,37 @@
+package Model.serveur;
+
+import java.util.ArrayList;
+
+public class ServeurDoImp implements ServeurDao{
+
+	@Override
+	public void ajouterServeur(Serveur serveur) {
+		
+		
+	}
+
+	@Override
+	public Serveur getServeurByid(int idServ) {
+		
+		return null;
+	}
+
+	@Override
+	public ArrayList<Serveur> getAllServeurs() {
+		
+		return null;
+	}
+
+	@Override
+	public void updateServeur(Serveur serveur) {
+		
+		
+	}
+
+	@Override
+	public void deleteServeur(int idServ) {
+		
+		
+	}
+
+}

@@ -1,0 +1,112 @@
+package Model.serveur;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import View.EspaceAdmin;
+
+public class ServeurDoImp implements ServeurDao{
+
+	private Connection con;
+	private ResultSet rs;
+	private Statement stm;
+	private JFrame frame;
+	private EspaceAdmin espAdmn;
+	
+	public ServeurDoImp(EspaceAdmin espAdmn) {
+		this.espAdmn = espAdmn;
+	}
+	
+
+	@Override
+	public Serveur getServeurByid(int idServ) {
+		
+		return null;
+	}
+
+	@Override
+	public ArrayList<Serveur> getAllServeurs() {
+		
+		return null;
+	}
+	
+	@Override
+	public void ajouterServeur(Serveur serveur) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");  
+			con=DriverManager.getConnection(  
+					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+			stm=con.createStatement();
+			rs = stm.executeQuery("select * from Serveur where IDSer = "+serveur.getIDSer());
+			if(rs.next()) {
+				JOptionPane.showMessageDialog(frame,"Serveur avec cet ID existe dja");
+			}else {
+				stm.executeUpdate("insert into Serveur values ("+serveur.getIDSer()+",'"+serveur.getNomServ()+"','"+serveur.getPrenomServ()+"','"+serveur.getLogin()+"','"+serveur.getPassword()+"','"+serveur.getActif()+"','"+serveur.getNbrRes()+"')");
+				JOptionPane.showMessageDialog(frame,"Serveur Ajouté");
+				espAdmn.clearServerTxtFields();
+				con.close();
+			}
+		}catch(Exception ex) {
+			JOptionPane.showMessageDialog(frame,ex);
+		}	
+		
+	}
+
+	@Override
+	public void updateServeur(Serveur serveur) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");  
+			con=DriverManager.getConnection(  
+			"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+			stm=con.createStatement();
+			rs = stm.executeQuery("select * from Serveur where IDSer = "+serveur.getIDSer());
+			if(!rs.next()) {
+				JOptionPane.showMessageDialog(frame,"Serveur avec cet ID n'existe pas");
+			}else {
+				stm.executeUpdate("update Serveur set NomSer='"+serveur.getNomServ()+"',PreNomSer='"+serveur.getPrenomServ()+"',login='"+serveur.getLogin()+"',password='"+serveur.getPassword()+"',actif='"+serveur.getActif()+"',NbrRes="+serveur.getNbrRes()+" where IDSer="+serveur.getIDSer());
+				JOptionPane.showMessageDialog(frame,"Le Serveur avec le numero "+serveur.getIDSer()+" a été modifié");
+				espAdmn.clearServerTxtFields();
+				con.close();
+			}
+			
+		}catch(Exception ex) {
+			JOptionPane.showMessageDialog(frame,ex);
+		}
+		
+	}
+
+	@Override
+	public void deleteServeur(int idServ) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");  
+			con=DriverManager.getConnection(  
+			"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
+			stm=con.createStatement();
+			    
+				rs = stm.executeQuery("select * from Serveur where IDSer = "+idServ);
+				if(!rs.next()) {
+					JOptionPane.showMessageDialog(frame,"Serveur avec cet ID n'existe pas.");
+				}else {
+					int response = JOptionPane.showConfirmDialog(null, "Voulez-vous supprimer ce serveur ?", "Confirmer",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					if (response == JOptionPane.YES_OPTION) {
+					stm.executeUpdate("delete from Serveur where IDSer = "+idServ);
+					JOptionPane.showMessageDialog(frame,"Serveur Supprimé");
+					espAdmn.clearServerTxtFields();
+					}
+				}
+			    
+						
+		    con.close();
+		}catch(Exception ex) {
+			JOptionPane.showMessageDialog(frame,ex);
+		}
+		
+	}
+
+}

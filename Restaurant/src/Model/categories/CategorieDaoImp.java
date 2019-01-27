@@ -64,9 +64,16 @@ public class CategorieDaoImp implements CategorieDao{
 			con=DriverManager.getConnection(  
 			"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 			stm=con.createStatement();
-			stm.executeUpdate("update Categorie set LibelleCat = '"+categ.getLibelle()+"' where CodeCat='"+categ.getCodeCateg()+"'");
-			JOptionPane.showMessageDialog(frame,"La Categorie avec le code "+categ.getCodeCateg()+" a été modifiée");
-			espAdmn.clearCategTxtFields();
+			rs = stm.executeQuery("select * from Categorie where CodeCat = '"+categ.getCodeCateg()+"'");
+			if(!rs.next()) {
+				JOptionPane.showMessageDialog(frame,"Cette categorie n'existe pas");
+			}else {
+				stm.executeUpdate("update Categorie set LibelleCat = '"+categ.getLibelle()+"' where CodeCat='"+categ.getCodeCateg()+"'");
+				JOptionPane.showMessageDialog(frame,"La Categorie avec le code "+categ.getCodeCateg()+" a été modifiée");
+				espAdmn.clearCategTxtFields();
+				con.close();
+			}
+			
 		}catch(Exception ex) {
 			JOptionPane.showMessageDialog(frame,ex);
 		}
@@ -80,8 +87,6 @@ public class CategorieDaoImp implements CategorieDao{
 			con=DriverManager.getConnection(  
 			"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
 			stm=con.createStatement();
-			
-			    
 				rs = stm.executeQuery("select * from Categorie where CodeCat = '"+codeCateg+"'");
 				if(!rs.next()) {
 					JOptionPane.showMessageDialog(frame,"Categorie n'existe pas.");
@@ -92,9 +97,7 @@ public class CategorieDaoImp implements CategorieDao{
 					JOptionPane.showMessageDialog(frame,"Categorie Supprimé");
 					espAdmn.clearCategTxtFields();
 				}
-			    }
-			
-						
+			    }	
 		    con.close();
 		}catch(Exception ex) {
 			JOptionPane.showMessageDialog(frame,ex);

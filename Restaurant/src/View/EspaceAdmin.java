@@ -5,6 +5,10 @@ import Model.categories.CategorieDaoImp;
 import Model.plats.PlatDaoImpl;
 import Model.plats.PlatService;
 import Model.plats.Plats;
+import Model.serveur.Serveur;
+import Model.serveur.ServeurDoImp;
+import Model.tables.Table;
+import Model.tables.TableDoImp;
 
 import java.awt.EventQueue;
 
@@ -61,6 +65,10 @@ public class EspaceAdmin {
 	private PlatDaoImpl pdi;
 	private Categorie categorie;
 	private CategorieDaoImp cdi;
+	private Serveur serveur;
+	private ServeurDoImp sdi;
+	private Table table;
+	private TableDoImp tdi;
 	private JLabel lbladminIcon,PlatsLabel,codePlatLabel,nomPlatLabel,prixPlatLabel,categPlatLabel,codeCategLabel,libelleCategLabel,lblCategories,lblNumero,lblNom,lblPrenom,lblLogin,lblPassword,lblActif,lblNbrReservation,lblServeurs,lblTables,lbNumTable,lblCapacite;
 	private JSeparator separator,separator_1,separator_2,separator_3,separator_4,separator_5,separator_6,separator_7;
 	private JLabel lblTitle,lblAdminUsrname,lblAdminMdp,lblCnctezVs,lblMdpOublie,lblLogo,lblRestName,lblSlogan;
@@ -1962,30 +1970,15 @@ public class EspaceAdmin {
 			}
 		));
 		serveurTable_JSP.setViewportView(serveurTable);
-		
+		sdi = new ServeurDoImp(this);
 		ajouterServrBtn = new JButton("Ajouter");
 		ajouterServrBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(isServeurEmpty()) {
 					JOptionPane.showMessageDialog(frame,"Veuillez remplir tous les champs");
 				}else {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
-					rs = stm.executeQuery("select * from Serveur where IDSer = "+Integer.parseInt(idServ_tf.getText()));
-					if(rs.next()) {
-						JOptionPane.showMessageDialog(frame,"Serveur avec cet ID existe dja");
-					}else {
-						stm.executeUpdate("insert into Serveur values ("+Integer.parseInt(idServ_tf.getText())+",'"+nomServ_tf.getText()+"','"+prenomServ_tf.getText()+"','"+usernmeServ_tf.getText()+"','"+passwrdServ_tf.getText()+"','"+actifServ_tf.getText()+"','"+Integer.parseInt(nbrResServ_tf.getText())+"')");
-						JOptionPane.showMessageDialog(frame,"Serveur Ajouté");
-						clearServerTxtFields();
-						con.close();
-					}
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
-				}	
+					serveur = new Serveur(Integer.parseInt(idServ_tf.getText()),nomServ_tf.getText(),prenomServ_tf.getText(),usernmeServ_tf.getText(),passwrdServ_tf.getText(),actifServ_tf.getText(),Integer.parseInt(nbrResServ_tf.getText()));
+					sdi.ajouterServeur(serveur);
 				}
 			}
 		});
@@ -2000,18 +1993,8 @@ public class EspaceAdmin {
 				if(isServeurEmpty()) {
 					JOptionPane.showMessageDialog(frame,"Veuillez remplir tous les champs");
 				}else {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
-					stm.executeUpdate("update Serveur set NomSer='"+nomServ_tf.getText()+"',PreNomSer='"+prenomServ_tf.getText()+"',login='"+usernmeServ_tf.getText()+"',password='"+passwrdServ_tf.getText()+"',actif='"+actifServ_tf.getText()+"',NbrRes="+Integer.parseInt(nbrResServ_tf.getText())+" where IDSer="+Integer.parseInt(idServ_tf.getText()));
-					JOptionPane.showMessageDialog(frame,"Le Serveur avec le numero "+idServ_tf.getText()+" a été modifié");
-					clearServerTxtFields();
-				    con.close();
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
-				}
+					serveur = new Serveur(Integer.parseInt(idServ_tf.getText()),nomServ_tf.getText(),prenomServ_tf.getText(),usernmeServ_tf.getText(),passwrdServ_tf.getText(),actifServ_tf.getText(),Integer.parseInt(nbrResServ_tf.getText()));
+					sdi.updateServeur(serveur);
 				}
 			}
 		});
@@ -2023,31 +2006,11 @@ public class EspaceAdmin {
 		supprServrBtn = new JButton("Supprimer");
 		supprServrBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
 					if(idServ_tf.getText().isEmpty()) {
 						JOptionPane.showMessageDialog(frame,"Veuillez entrer le numero du serveur a supprimé");
 					}else {
-						int response = JOptionPane.showConfirmDialog(null, "Voulez-vous supprimer ce serveur ?", "Confirmer",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-					    if (response == JOptionPane.YES_OPTION) {
-						rs = stm.executeQuery("select * from Serveur where IDSer = "+Integer.parseInt(idServ_tf.getText()));
-						if(rs.next()) {
-							stm.executeUpdate("delete from Serveur where IDSer = "+Integer.parseInt(idServ_tf.getText()));
-							JOptionPane.showMessageDialog(frame,"Serveur Supprimé");
-							clearServerTxtFields();
-						}else {
-							JOptionPane.showMessageDialog(frame,"Serveur avec cet ID n'existe pas.");
-						}
-					    }
+						sdi.deleteServeur(Integer.parseInt(idServ_tf.getText()));
 					}
-								
-				    con.close();
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
-				}
 			}
 		});
 		supprServrBtn.setForeground(Color.WHITE);
@@ -2203,30 +2166,15 @@ public class EspaceAdmin {
 			}
 		));
 		tablesTable_JSP.setViewportView(tablesTable);
-		
+		tdi = new TableDoImp(this);
 		ajoutTableBtn = new JButton("Ajouter");
 		ajoutTableBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(isTableEmpty()) {
 					JOptionPane.showMessageDialog(frame,"Veuillez remplir tous les champs");
 				}else {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
-					rs = stm.executeQuery("select * from Tables where NumTable = "+Integer.parseInt(tableNum_tf.getText()));
-					if(rs.next()) {
-						JOptionPane.showMessageDialog(frame,"Table avec ce Numero existe déja");
-					}else {				
-						stm.executeUpdate("insert into Tables values ("+Integer.parseInt(tableNum_tf.getText())+","+Integer.parseInt(tableNbrPlace_tf.getText())+")");
-						JOptionPane.showMessageDialog(frame,"Table Ajouté");
-						clearTableTxtFields();
-						con.close();
-					}
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
-				}	
+					table = new Table(Integer.parseInt(tableNum_tf.getText()), Integer.parseInt(tableNbrPlace_tf.getText()));
+					tdi.ajouterTable(table);
 				}
 			}
 		});
@@ -2241,18 +2189,8 @@ public class EspaceAdmin {
 				if(isTableEmpty()) {
 					JOptionPane.showMessageDialog(frame,"Veuillez remplir tous les champs");
 				}else {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
-					stm.executeUpdate("update Tables set NbrPlaceTable = "+Integer.parseInt(tableNbrPlace_tf.getText())+" where NumTable="+Integer.parseInt(tableNum_tf.getText()));
-					JOptionPane.showMessageDialog(frame,"La Tables avec le code "+tableNum_tf.getText()+" a été modifiée");
-					clearTableTxtFields();
-				    con.close();
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
-				}
+					table = new Table(Integer.parseInt(tableNum_tf.getText()),Integer.parseInt(tableNbrPlace_tf.getText()));
+					tdi.updateTable(table);
 				}
 			}
 		});
@@ -2264,31 +2202,12 @@ public class EspaceAdmin {
 		supprTableBtn = new JButton("Supprimer");
 		supprTableBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");  
-					con=DriverManager.getConnection(  
-					"jdbc:mysql://localhost:3306/Restaurant","root","mysql");
-					stm=con.createStatement();
+					
 					if(tableNum_tf.getText().isEmpty()) {
 						JOptionPane.showMessageDialog(frame,"Veuillez entrer le numero du Table a supprimée");
 					}else {
-						int response = JOptionPane.showConfirmDialog(null, "Voulez-vous supprimer cette table ?", "Confirmer",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-					    if (response == JOptionPane.YES_OPTION) {
-						rs = stm.executeQuery("select * from Tables where NumTable = "+Integer.parseInt(tableNum_tf.getText()));
-						if(rs.next()) {
-							stm.executeUpdate("delete from Tables where NumTable = "+Integer.parseInt(tableNum_tf.getText()));
-							JOptionPane.showMessageDialog(frame,"Table Supprimé");
-							clearTableTxtFields();
-						}else {
-							JOptionPane.showMessageDialog(frame,"Table avec ce numero n'existe pas.");
-						}
-					    }
+						tdi.deleteTable(Integer.parseInt(tableNum_tf.getText()));
 					}
-								
-				    con.close();
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame,ex);
-				}
 			}
 		});
 		supprTableBtn.setForeground(Color.WHITE);

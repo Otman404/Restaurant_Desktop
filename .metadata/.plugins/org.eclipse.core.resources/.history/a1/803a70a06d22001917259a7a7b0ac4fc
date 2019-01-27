@@ -1,0 +1,37 @@
+package Model.tables;
+
+import java.util.ArrayList;
+
+public class TableDoImp implements TableDao{
+
+
+	@Override
+	public Table getTableByNum(int numTable) {
+		
+		return null;
+	}
+
+	@Override
+	public ArrayList<Table> getAllTables() {
+		
+		return null;
+	}
+
+	@Override
+	public void ajouterTable(Table table) {
+		
+		
+	}
+	@Override
+	public void updateTable(Table table) {
+		
+		
+	}
+
+	@Override
+	public void deleteTable(int numTable) {
+		
+		
+	}
+
+}

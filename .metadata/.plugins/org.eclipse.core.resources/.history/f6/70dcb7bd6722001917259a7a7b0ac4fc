@@ -1,0 +1,5 @@
+package Model.serveur;
+
+public class ServeurService {
+
+}
