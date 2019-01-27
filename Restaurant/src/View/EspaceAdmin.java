@@ -1475,10 +1475,7 @@ public class EspaceAdmin {
 					}else {						
 						stm.executeUpdate("insert into Plate values ("+Integer.parseInt(codePlat_tf.getText())+",'"+nomPlat_tf.getText()+"','"+Double.parseDouble(prixPlat_tf.getText())+"','"+categPlat_tf.getText()+"')");
 				    	JOptionPane.showMessageDialog(frame,"Plat Ajouté");
-				    	codePlat_tf.setText("");
-						nomPlat_tf.setText("");
-						prixPlat_tf.setText("");
-						categPlat_tf.setText("");
+				    	clearPlatTxtFields();
 				    	con.close();
 					}
 				}catch(Exception ex) {
@@ -1505,10 +1502,7 @@ public class EspaceAdmin {
 					stm=con.createStatement();
 					stm.executeUpdate("update Plate set NomPlate = '"+nomPlat_tf.getText()+"',PrixPlate="+Double.parseDouble(prixPlat_tf.getText())+",CodeCat='"+categPlat_tf.getText()+"' where CodePlat="+Integer.parseInt(codePlat_tf.getText()));
 					JOptionPane.showMessageDialog(frame,"Le Plat avec le code "+codePlat_tf.getText()+" a été modifié");
-					codePlat_tf.setText("");
-					nomPlat_tf.setText("");
-					prixPlat_tf.setText("");
-					categPlat_tf.setText("");
+					clearPlatTxtFields();
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
@@ -1538,10 +1532,7 @@ public class EspaceAdmin {
 					    	if(rs.next()) {
 					    		stm.executeUpdate("delete from Plate where CodePlat = '"+codePlat_tf.getText()+"'");
 					    		JOptionPane.showMessageDialog(frame,"Plat Supprimé");
-					    		codePlat_tf.setText("");
-					    		nomPlat_tf.setText("");
-					    		prixPlat_tf.setText("");
-					    		categPlat_tf.setText("");
+					    		clearPlatTxtFields();
 						}else {
 							JOptionPane.showMessageDialog(frame,"Plat n'existe pas.");
 						}
@@ -1761,8 +1752,7 @@ public class EspaceAdmin {
 					stm=con.createStatement();
 				    stm.executeUpdate("insert into Categorie values ('"+codeCatg_tf.getText()+"','"+libelleCateg_tf.getText()+"')");
 				    JOptionPane.showMessageDialog(frame,"Categorie Ajouté");
-				    codeCatg_tf.setText("");
-					libelleCateg_tf.setText("");
+				    clearCategTxtFields();
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
@@ -1788,8 +1778,7 @@ public class EspaceAdmin {
 					stm=con.createStatement();
 					stm.executeUpdate("update Categorie set LibelleCat = '"+libelleCateg_tf.getText()+"' where CodeCat='"+codeCatg_tf.getText()+"'");
 					JOptionPane.showMessageDialog(frame,"La Categorie avec le code "+codeCatg_tf.getText()+" a été modifiée");
-					codeCatg_tf.setText("");
-					libelleCateg_tf.setText("");
+					clearCategTxtFields();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
 				}
@@ -1818,8 +1807,7 @@ public class EspaceAdmin {
 						if(rs.next()) {
 							stm.executeUpdate("delete from Categorie where CodeCat = '"+codeCatg_tf.getText()+"'");
 							JOptionPane.showMessageDialog(frame,"Categorie Supprimé");
-							codeCatg_tf.setText("");
-							libelleCateg_tf.setText("");
+							clearCategTxtFields();
 						}else {
 							JOptionPane.showMessageDialog(frame,"Categorie n'existe pas.");
 						}
@@ -2073,13 +2061,7 @@ public class EspaceAdmin {
 					}else {
 						stm.executeUpdate("insert into Serveur values ("+Integer.parseInt(idServ_tf.getText())+",'"+nomServ_tf.getText()+"','"+prenomServ_tf.getText()+"','"+usernmeServ_tf.getText()+"','"+passwrdServ_tf.getText()+"','"+actifServ_tf.getText()+"','"+Integer.parseInt(nbrResServ_tf.getText())+"')");
 						JOptionPane.showMessageDialog(frame,"Serveur Ajouté");
-						idServ_tf.setText("");
-						nomServ_tf.setText("");
-						prenomServ_tf.setText("");
-						usernmeServ_tf.setText("");
-						passwrdServ_tf.setText("");
-						actifServ_tf.setText("");
-						nbrResServ_tf.setText("");
+						clearServerTxtFields();
 						con.close();
 					}
 				}catch(Exception ex) {
@@ -2106,13 +2088,7 @@ public class EspaceAdmin {
 					stm=con.createStatement();
 					stm.executeUpdate("update Serveur set NomSer='"+nomServ_tf.getText()+"',PreNomSer='"+prenomServ_tf.getText()+"',login='"+usernmeServ_tf.getText()+"',password='"+passwrdServ_tf.getText()+"',actif='"+actifServ_tf.getText()+"',NbrRes="+Integer.parseInt(nbrResServ_tf.getText())+" where IDSer="+Integer.parseInt(idServ_tf.getText()));
 					JOptionPane.showMessageDialog(frame,"Le Serveur avec le numero "+idServ_tf.getText()+" a été modifié");
-					idServ_tf.setText("");
-					nomServ_tf.setText("");
-					prenomServ_tf.setText("");
-					usernmeServ_tf.setText("");
-					passwrdServ_tf.setText("");
-					actifServ_tf.setText("");
-					nbrResServ_tf.setText("");
+					clearServerTxtFields();
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
@@ -2142,13 +2118,7 @@ public class EspaceAdmin {
 						if(rs.next()) {
 							stm.executeUpdate("delete from Serveur where IDSer = "+Integer.parseInt(idServ_tf.getText()));
 							JOptionPane.showMessageDialog(frame,"Serveur Supprimé");
-							idServ_tf.setText("");
-							nomServ_tf.setText("");
-							prenomServ_tf.setText("");
-							usernmeServ_tf.setText("");
-							passwrdServ_tf.setText("");
-							actifServ_tf.setText("");
-							nbrResServ_tf.setText("");
+							clearServerTxtFields();
 						}else {
 							JOptionPane.showMessageDialog(frame,"Serveur avec cet ID n'existe pas.");
 						}
@@ -2342,8 +2312,7 @@ public class EspaceAdmin {
 					}else {				
 						stm.executeUpdate("insert into Tables values ("+Integer.parseInt(tableNum_tf.getText())+","+Integer.parseInt(tableNbrPlace_tf.getText())+")");
 						JOptionPane.showMessageDialog(frame,"Table Ajouté");
-						tableNum_tf.setText("");
-						tableNbrPlace_tf.setText("");
+						clearTableTxtFields();
 						con.close();
 					}
 				}catch(Exception ex) {
@@ -2370,8 +2339,7 @@ public class EspaceAdmin {
 					stm=con.createStatement();
 					stm.executeUpdate("update Tables set NbrPlaceTable = "+Integer.parseInt(tableNbrPlace_tf.getText())+" where NumTable="+Integer.parseInt(tableNum_tf.getText()));
 					JOptionPane.showMessageDialog(frame,"La Tables avec le code "+tableNum_tf.getText()+" a été modifiée");
-					tableNum_tf.setText("");
-					tableNbrPlace_tf.setText("");
+					clearTableTxtFields();
 				    con.close();
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(frame,ex);
@@ -2401,8 +2369,7 @@ public class EspaceAdmin {
 						if(rs.next()) {
 							stm.executeUpdate("delete from Tables where NumTable = "+Integer.parseInt(tableNum_tf.getText()));
 							JOptionPane.showMessageDialog(frame,"Table Supprimé");
-							tableNum_tf.setText("");
-							tableNbrPlace_tf.setText("");
+							clearTableTxtFields();
 						}else {
 							JOptionPane.showMessageDialog(frame,"Table avec ce numero n'existe pas.");
 						}
@@ -2498,7 +2465,7 @@ public class EspaceAdmin {
         jw.dispose();
 	}
 	public boolean isPlatsEmpty() {
-		if(codePlat_tf.getText().isEmpty() || nomPlat_tf.getText().isEmpty() || prixPlat_tf.getText().isEmpty() || codeCatg_tf.getText().isEmpty()) {
+		if(codePlat_tf.getText().isEmpty() || nomPlat_tf.getText().isEmpty() || prixPlat_tf.getText().isEmpty() || categPlat_tf.getText().isEmpty()) {
 			return true;
 		}
 		return false;
@@ -2526,5 +2493,28 @@ public class EspaceAdmin {
 			return true;
 		}
 		return false;
+	}
+	public void clearPlatTxtFields() {
+		codePlat_tf.setText("");
+		nomPlat_tf.setText("");
+		prixPlat_tf.setText("");
+		categPlat_tf.setText("");
+	}
+	public void clearCategTxtFields() {
+		codeCatg_tf.setText("");
+		libelleCateg_tf.setText("");
+	}
+	public void clearServerTxtFields() {
+		idServ_tf.setText("");
+		nomServ_tf.setText("");
+		prenomServ_tf.setText("");
+		usernmeServ_tf.setText("");
+		passwrdServ_tf.setText("");
+		actifServ_tf.setText("");
+		nbrResServ_tf.setText("");
+	}
+	public void clearTableTxtFields(){
+		tableNum_tf.setText("");
+		tableNbrPlace_tf.setText("");
 	}
 }
