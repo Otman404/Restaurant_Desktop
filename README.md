@@ -41,12 +41,12 @@ create the database (you will find tables and triggers .. in Database folder), c
 ![](screenshots/adminTables.png)
 
 
-## use case diagram
+## Use case Diagram
 ![](screenshots/useCase.jpg)
 
-## Data Base Diagram
+## DataBase Diagram
 ![](screenshots/dbDiagram.png)
 
 # Contribution
-If you found a bug,or have any improvement, please open an issue or try to propose a fix through a pull request
+If you found a bug, Or have any improvement, please open an issue or try to propose a fix through a pull request
 Thank you!
