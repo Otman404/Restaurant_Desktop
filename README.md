@@ -23,7 +23,7 @@ create the database (you will find tables and triggers .. in Database folder), c
     
     
 ## Home
-![](screenshots/adminhome.png)
+![](screenshots/adminHome.png)
 
 
 ## Gestion des Plats
