@@ -27,7 +27,7 @@ create the database (you will find tables and triggers .. in Database folder), c
 
 
 ## Gestion des Plats
-![](screenshots/adminPlats.png)
+![](screenshots/adminPLats.png)
 
 
 ## Gestion des Categories
